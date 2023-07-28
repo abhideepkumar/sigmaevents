@@ -46,7 +46,7 @@ export default function Home() {
       <footer className="bg-indigo-600 text-white py-4">
         <div className="container mx-auto px-6 text-center">
           <p>
-            &copy; {new Date().getFullYear()} Your Website Name. All rights
+            &copy; {new Date().getFullYear()} Sigma Events. Some rights
             reserved.
           </p>
         </div>

@@ -7,36 +7,26 @@ import User from "@/components/user";
 const Setting = () => {
   const { data: session, status } = useSession();
   const [userExist, setUserExist] = useState(null);
-  const [components, setComponents] = useState("");
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // console.log("status:", status);
     fetch("/api/auth/checkuser")
       .then((response) => response.json())
       .then((data) => {
-        // console.log("User already exists", data.userExists);
-        // console.log("User has data", data.userData);
-        if (data.userData.document != null) {
-          setUserExist(data);
-          setComponents("User");
-        } else {
-          setUserExist(data);
-          setComponents("NewUser");
-        }
+        setUserExist(data);
+        setLoading(false);
       })
       .catch((error) => {
         console.error("Error while fetching user data:", error);
+        setLoading(false);
       });
   }, [status]);
 
-  // console.log("Components:", components);
-  // console.log("UserExist:", userExist);
-  if (status == "loading") {
+  if (loading) {
     return <div className="text-center">Loading</div>;
   } else {
     if (status == "authenticated") {
-      if (components === "User" && userExist) {
-        // console.log(userExist);
+      if (userExist && userExist.userData.document != null) {
         return <User userExist={userExist} />;
       } else {
         return <Newuser />;
