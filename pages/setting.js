@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import Access from "@/components/access";
-import Newuser from "@/components/newuser";
 import User from "@/components/user";
+import Newuser from "@/components/newuser";
 
 const Setting = () => {
   const { data: session, status } = useSession();

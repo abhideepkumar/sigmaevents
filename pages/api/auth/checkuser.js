@@ -1,23 +1,23 @@
 import axios from "axios";
 import { getSession } from "next-auth/react";
 export default async function handler(req, res) {
-  const session = await getSession({req});
-  console.log(session)
-  console.log(req)
+  const session = await getSession({ req });
+  console.log(session);
+  console.log(req);
   try {
     const { email } = session.user;
-console.log("this is ",{email}, typeof({email}))
+    // console.log("this is ", { email }, typeof { email });
     const response = await axios.post(
       `${process.env.MONGO_API}findOne`,
       {
         collection: "students",
         database: "test",
         dataSource: "Cluster1",
-        filter: {email},
+        filter: { email },
       },
       {
         headers: {
-          apiKey: process.env.MONGO_KEY, 
+          apiKey: process.env.MONGO_KEY,
           "Content-Type": "application/json",
         },
       }
@@ -25,11 +25,11 @@ console.log("this is ",{email}, typeof({email}))
 
     const userData = response.data;
     const userExists = userData !== null;
-      console.log({ userExists,userData })
+    console.log({ userExists, userData });
 
-    res.status(200).json({ userExists,userData });
+    res.status(200).json({ userExists, userData });
   } catch (error) {
     console.error("Error checking user data:", error);
-    res.status(500).end(); // Internal Server Error
+    res.status(500).end();
   }
 }

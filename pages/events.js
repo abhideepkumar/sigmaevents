@@ -14,7 +14,6 @@ const events = [
     description: "This is the description of Event 2.",
     date: "July 23, 2023",
   },
-  // Add more events here...
 ];
 
 const Events = () => {

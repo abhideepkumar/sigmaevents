@@ -7,7 +7,7 @@ const studentSchema = new Schema({
   phoneNo: { type: String, required: true },
   branch: { type: String, required: true },
   college: { type: String, required: true },
-  passoutYear: { type: Number, required: true },
+  passoutYear: { type: String, required: true },
   appliedEvents: [{ type: Schema.Types.ObjectId, ref: 'Event' }],
 });
 

@@ -19,13 +19,13 @@ const User = ({ userExist }) => {
         <p>Phone No: {metadata.phoneNo}</p>
         <p>Branch: {metadata.branch}</p>
         <p>College: {metadata.college}</p>
-        <p>Passout Year: {metadata.passoutYear}</p>
+        {/* <p>Passout Year: {metadata.passoutYear}</p> */}
       </div>
       <button
         onClick={() =>
           signOut("google", { callbackUrl: "http://localhost:3000" })
         }
-        className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-md shadow-md hover:bg-blue-600 focus:outline-none"
+        className="mt-4 px-4 py-2 bg-red-400 text-white rounded-md shadow-md hover:bg-red-600 focus:outline-none"
       >
         Sign out
       </button>
