@@ -9,19 +9,18 @@ export default async function handler(req, res) {
       iUrl,
       {
         collection: "students",
-        database: "test",
+        database: "profiles",
         dataSource: "Cluster1",
         document: {
-            "name": data.name,
-            "USN": data.USN,
-            "email": data.email,
-            "phoneNo": data.phoneNo,
-            "branch": data.branch,
-            "college": data.college,
-            "LastYear": data.passoutYear,
-            "appliedEvents": []
-          }
-          
+          name: data.name,
+          USN: data.USN,
+          email: data.email,
+          phoneNo: data.phoneNo,
+          branch: data.branch,
+          college: data.college,
+          LastYear: data.passoutYear,
+          appliedEvents: [],
+        },
       },
       {
         headers: {

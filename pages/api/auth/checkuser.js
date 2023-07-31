@@ -6,12 +6,11 @@ export default async function handler(req, res) {
   console.log(req);
   try {
     const { email } = session.user;
-    // console.log("this is ", { email }, typeof { email });
     const response = await axios.post(
       `${process.env.MONGO_API}findOne`,
       {
         collection: "students",
-        database: "test",
+        database: "profiles",
         dataSource: "Cluster1",
         filter: { email },
       },

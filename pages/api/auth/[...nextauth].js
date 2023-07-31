@@ -11,12 +11,12 @@ export const authOptions = {
   callbacks: {
     async signIn({ account, profile }) {
       if (account.provider === "google") {
-        return profile.email_verified
+        return profile.email_verified;
       }
-      return true
+      return true;
     },
-  secret: process.env.NEXTAUTH_SECRET,
-  }
+    secret: process.env.NEXTAUTH_SECRET,
+  },
 };
 
 export default NextAuth(authOptions);

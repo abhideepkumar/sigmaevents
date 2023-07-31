@@ -10,7 +10,9 @@ const Login = () => {
       {session ? (
         <>
           <button
-            onClick={() => signOut("google", { callbackUrl: "http://localhost:3000" })}
+            onClick={() =>
+              signOut("google", { callbackUrl: "http://localhost:3000" })
+            }
             className="px-4 py-2 bg-red-500 rounded-md text-white font-medium shadow hover:bg-red-600"
           >
             Sign out
