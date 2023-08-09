@@ -23,7 +23,7 @@ const AllEvents = () => {
   }, []);
   const handleRegister = async (event) => {
     try {
-      const response = await fetch(`/api/auth/register?eventId=${eventId}&userId=${userId}`);
+      const response = await fetch(`/api/auth/register?eventId=${event._id}&userId=${userId}`);
       if (response.ok) {
         // console.log("Registered for event:", eventId);
       } else {
