@@ -1,30 +1,23 @@
 import React from "react";
 import { useSession, signOut } from "next-auth/react";
+import Cookies from "js-cookie";
 
-const User = ({ userExist }) => {
-  const { data: session, status } = useSession();
-  if (!userExist) {
-    return <div>Loading...</div>;
-  }
-  // console.log(userExist.userData.document);
-  const metadata = userExist.userData.document;
+const User = () => {
   return (
     <div className="flex flex-col items-center justify-center h-screen">
       <div className="bg-white p-6 rounded-md shadow-md">
         <h2 className="text-2xl font-semibold mb-4">
-          Welcome, {metadata.name}
+          Welcome, {Cookies.get("name") || "Can't Fetch"}
         </h2>
-        <p>Email: {session?.user?.email}</p>
-        <p>USN: {metadata.USN}</p>
-        <p>Phone No: {metadata.phoneNo}</p>
-        <p>Branch: {metadata.branch}</p>
-        <p>College: {metadata.college}</p>
-        {/* <p>Passout Year: {metadata.passoutYear}</p> */}
+        <p>Email: {Cookies.get("email") || "Can't Fetch"}</p>
+        <p>USN: {Cookies.get("USN") || "Can't Fetch"}</p>
+        <p>Phone No: {Cookies.get("phoneNo") || "Can't Fetch"}</p>
+        <p>Branch: {Cookies.get("branch") || "Can't Fetch"}</p>
+        <p>College: {Cookies.get("college") || "Can't Fetch"}</p>
+        <p>Passout Year: {Cookies.get("LastYear") || "Can't Fetch"}</p>
       </div>
       <button
-        onClick={() =>
-          signOut("google", { callbackUrl: "http://localhost:3000" })
-        }
+        onClick={() => signOut("google", { callbackUrl: process.env.NEXTAUTH_URL })}
         className="mt-4 px-4 py-2 bg-red-400 text-white rounded-md shadow-md hover:bg-red-600 focus:outline-none"
       >
         Sign out

@@ -17,13 +17,9 @@ export default async function handler(req, res) {
         },
       }
     );
-
-    const userDataArray = response.data;
-    console.log("userDataArray: ", userDataArray);
-
-    res.status(200).json(userDataArray);
+    res.status(200).json(response.data);
   } catch (error) {
-    console.error("Error retrieving user data:", error);
+    console.error("Error retrieving all events:", error);
     res.status(500).end();
   }
 }

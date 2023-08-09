@@ -34,7 +34,7 @@ export default async function handler(req, res) {
     res.status(200).json(response.data);
   } catch (error) {
     console.log("error data sent: ", data);
-    console.error("Error checking user data:", error);
+    console.error("Error uploading user data:", error);
     res.status(500).end();
   }
 }

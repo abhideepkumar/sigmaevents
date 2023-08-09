@@ -1,15 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
+import Cookies from "js-cookie";
 
 const AllEvents = () => {
   const [EventAll, setEventAll] = useState([]);
   const [loading, setLoading] = useState(true);
+  const { data: session } = useSession();
+  const userId=Cookies.get('_id');
+  // console.log("UserId: ", userId);
   useEffect(() => {
     fetch("/api/auth/fetchevents")
       .then((response) => response.json())
       .then((data) => {
-        const reversed_data = data.documents.reverse();
-        setEventAll(reversed_data);
+        const events_data = data.documents.reverse();
+        setEventAll(events_data);
         setLoading(false);
       })
       .catch((error) => {
@@ -17,8 +21,19 @@ const AllEvents = () => {
         setLoading(false);
       });
   }, []);
-  const { data: session } = useSession();
-
+  const handleRegister = async (event) => {
+    try {
+      const response = await fetch(`/api/auth/register?eventId=${eventId}&userId=${userId}`);
+      if (response.ok) {
+        // console.log("Registered for event:", eventId);
+      } else {
+        console.log("Registration failed for event:", event.name);
+        console.log("Response from server failed", response.data);
+      }
+    } catch (error) {
+      console.error("Error while registering:", error);
+    }
+  };
   return (
     <main className="container p-4 mx-auto">
       <h1 className="text-3xl font-bold mb-6">Events</h1>
@@ -57,7 +72,7 @@ const AllEvents = () => {
                         'Do you want to confirm for the event  "' + event.title + `"`
                       )
                     ) {
-                      console.log("Confirmed registration");
+                      handleRegister(event);
                     } else {
                       console.log("Registration cancelled");
                     }

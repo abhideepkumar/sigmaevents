@@ -29,7 +29,7 @@ const Newuser = () => {
         console.log("Data sent successfully!");
         setIstrue(true);
       } else {
-        console.log("response: ", response);
+        console.log("response: ", response.data);
       }
     } catch (err) {
       console.error("Error saving data from catch block", err);

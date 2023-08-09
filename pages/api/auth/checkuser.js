@@ -2,8 +2,7 @@ import axios from "axios";
 import { getSession } from "next-auth/react";
 export default async function handler(req, res) {
   const session = await getSession({ req });
-  console.log(session);
-  console.log(req);
+  console.log("Session fetched from NextAuth: ",session);
   try {
     const { email } = session.user;
     const response = await axios.post(
@@ -22,13 +21,9 @@ export default async function handler(req, res) {
       }
     );
 
-    const userData = response.data;
-    const userExists = userData !== null;
-    console.log({ userExists, userData });
-
-    res.status(200).json({ userExists, userData });
+    res.status(200).json(response.data.document);
   } catch (error) {
-    console.error("Error checking user data:", error);
+    console.error("checkuser file saying Error checking user data:", error);
     res.status(500).end();
   }
 }
