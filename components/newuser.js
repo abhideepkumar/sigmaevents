@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useSession } from "next-auth/react";
-import Setting from "@/pages/setting";
+import User from "./user";
 const Newuser = () => {
   const { data: session } = useSession();
-  const [istrue, setIstrue] = useState(false);
+  const [istrue, setIstrue] = useState(true);
   const [formData, setFormData] = useState({
     name: "",
     USN: "",
@@ -27,7 +27,7 @@ const Newuser = () => {
       });
       if (response.ok) {
         console.log("Data sent successfully!");
-        setIstrue(true);
+        setIstrue(false);
       } else {
         console.log("response: ", response.data);
       }
@@ -44,7 +44,7 @@ const Newuser = () => {
   };
   return (
     <>
-      {!istrue && (
+      {istrue && (
         <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8 flex-col">
           <div className="text-center text-red-700">
             Once you save it, then you have to contact us through the
@@ -54,10 +54,7 @@ const Newuser = () => {
           <div className="max-w-md w-full p-8 rounded-lg shadow-lg bg-slate-100">
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
-                <label
-                  htmlFor="name"
-                  className="block text-gray-700 font-medium"
-                >
+                <label htmlFor="name" className="block text-gray-700 font-medium">
                   Name:
                 </label>
                 <input
@@ -69,10 +66,7 @@ const Newuser = () => {
                 />
               </div>
               <div>
-                <label
-                  htmlFor="USN"
-                  className="block text-gray-700 font-medium"
-                >
+                <label htmlFor="USN" className="block text-gray-700 font-medium">
                   USN:
                 </label>
                 <input
@@ -85,10 +79,7 @@ const Newuser = () => {
               </div>
               <div></div>
               <div>
-                <label
-                  htmlFor="phoneNo"
-                  className="block text-gray-700 font-medium"
-                >
+                <label htmlFor="phoneNo" className="block text-gray-700 font-medium">
                   Phone Number(without +91):
                 </label>
                 <input
@@ -100,10 +91,7 @@ const Newuser = () => {
                 />
               </div>
               <div>
-                <label
-                  htmlFor="branch"
-                  className="block text-gray-700 font-medium"
-                >
+                <label htmlFor="branch" className="block text-gray-700 font-medium">
                   Branch:
                 </label>
                 <input
@@ -115,10 +103,7 @@ const Newuser = () => {
                 />
               </div>
               <div>
-                <label
-                  htmlFor="college"
-                  className="block text-gray-700 font-medium"
-                >
+                <label htmlFor="college" className="block text-gray-700 font-medium">
                   College:
                 </label>
                 <input
@@ -130,10 +115,7 @@ const Newuser = () => {
                 />
               </div>
               <div>
-                <label
-                  htmlFor="passoutYear"
-                  className="block text-gray-700 font-medium"
-                >
+                <label htmlFor="passoutYear" className="block text-gray-700 font-medium">
                   Pass Out Year:
                 </label>
                 <input
@@ -156,7 +138,7 @@ const Newuser = () => {
           </div>
         </div>
       )}
-      {istrue && <Setting />}
+      {!istrue && <User />}
     </>
   );
 };

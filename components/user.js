@@ -17,7 +17,13 @@ const User = () => {
         <p>Passout Year: {Cookies.get("LastYear") || "Can't Fetch"}</p>
       </div>
       <button
-        onClick={() => signOut("google", { callbackUrl: process.env.NEXTAUTH_URL })}
+        onClick={() => {
+          signOut("google", { callbackUrl: process.env.NEXTAUTH_URL });
+          const cookies = Cookies.get();
+          for (const cookie in cookies) {
+            Cookies.remove(cookie);
+          }
+        }}
         className="mt-4 px-4 py-2 bg-red-400 text-white rounded-md shadow-md hover:bg-red-600 focus:outline-none"
       >
         Sign out

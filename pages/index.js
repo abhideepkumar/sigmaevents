@@ -15,7 +15,8 @@ export default function Home() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
             <Image
-              src="/home_image.jpg"
+              src="https://source.unsplash.com/collection/8317102/480x360"
+              loader={() => "https://source.unsplash.com/collection/8317102/480x360"}
               alt="Welcome Image"
               width={600}
               height={400}
