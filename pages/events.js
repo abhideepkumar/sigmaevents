@@ -1,12 +1,12 @@
-import AllEvents from '@/components/allEvents'
-import React from 'react'
+import AllEvents from "@/components/allEvents";
+import React from "react";
 
 const Events = () => {
   return (
-   <>
-   <AllEvents/>
-   </>
-  )
-}
+    <>
+      <AllEvents />
+    </>
+  );
+};
 
-export default Events
+export default Events;

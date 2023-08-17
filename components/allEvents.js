@@ -6,7 +6,11 @@ const AllEvents = () => {
   const [EventAll, setEventAll] = useState([]);
   const [loading, setLoading] = useState(true);
   const { data: session } = useSession();
-  const userId=Cookies.get('_id');
+  const userId = Cookies.get("_id");
+  let Allset = false;
+  if (userId != undefined) {
+    Allset = true;
+  }
   // console.log("UserId: ", userId);
   useEffect(() => {
     fetch("/api/auth/fetchevents")
@@ -42,13 +46,8 @@ const AllEvents = () => {
           <h1 className="text-2xl font-semibold text-gray-600">Loading... Please Wait</h1>
         ) : (
           EventAll.map((event) => (
-            <div
-              key={event._id}
-              className="border border-gray-300 rounded-lg p-4 hover:bg-gray-100 transition"
-            >
-              <h2 className="text-xl font-semibold mb-2">
-                {event.title || "Not Mentioned"}
-              </h2>
+            <div key={event._id} className="border border-gray-300 rounded-lg p-4 hover:bg-gray-100 transition">
+              <h2 className="text-xl font-semibold mb-2">{event.title || "Not Mentioned"}</h2>
               <p className="text-gray-600">{event.date || "Not Mentioned"}</p>
               <p className="mt-2">{event.description || "Not Mentioned"}</p>
               <p className="mt-2">
@@ -67,11 +66,7 @@ const AllEvents = () => {
                 <button
                   className="mt-4 bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
                   onClick={() => {
-                    if (
-                      confirm(
-                        'Do you want to confirm for the event  "' + event.title + `"`
-                      )
-                    ) {
+                    if (confirm('Do you want to confirm Registeration for the event  "' + event.title + `"`)) {
                       handleRegister(event);
                     } else {
                       console.log("Registration cancelled");
@@ -81,7 +76,7 @@ const AllEvents = () => {
                   Register
                 </button>
               )}
-              {!session && <div className="text-red-600">Login to Register</div>}
+              {!Allset && !session && <div className="text-red-600">Login and fill data in setting to Register</div>}
             </div>
           ))
         )}

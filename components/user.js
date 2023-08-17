@@ -6,9 +6,7 @@ const User = () => {
   return (
     <div className="flex flex-col items-center justify-center h-screen">
       <div className="bg-white p-6 rounded-md shadow-md">
-        <h2 className="text-2xl font-semibold mb-4">
-          Welcome, {Cookies.get("name") || "Can't Fetch"}
-        </h2>
+        <h2 className="text-2xl font-semibold mb-4">Welcome, {Cookies.get("name") || "Can't Fetch"}</h2>
         <p>Email: {Cookies.get("email") || "Can't Fetch"}</p>
         <p>USN: {Cookies.get("USN") || "Can't Fetch"}</p>
         <p>Phone No: {Cookies.get("phoneNo") || "Can't Fetch"}</p>

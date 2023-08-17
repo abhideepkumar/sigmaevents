@@ -51,12 +51,6 @@ const Login = () => {
         <button
           onClick={() => {
             signIn("google", process.env.NEXTAUTH_URL);
-            // status !== "authenticated"
-            //   ? console.log("Checking the status!")
-            //   : Cookies.get("_id") !== undefined
-            //   ? console.log("All Good!")
-            //   : router.push("/setting");
-            // console.log("At least I am working");
           }}
           className="px-4 py-1 bg-blue-500 rounded-md text-white font-medium shadow hover:bg-blue-600"
         >

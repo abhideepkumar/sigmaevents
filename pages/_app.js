@@ -1,18 +1,11 @@
-import { useRouter } from "next/router";
 import { SessionProvider } from "next-auth/react";
 import Navbar from "@/components/navbar";
 import "@/styles/globals.css";
 
-export default function App({
-  Component,
-  pageProps: { session, ...pageProps },
-}) {
-  const router = useRouter();
-  const isAdminPage = router.pathname.startsWith("/admin");
-
+export default function App({ Component, pageProps: { session, ...pageProps } }) {
   return (
     <SessionProvider session={session}>
-      {!isAdminPage && <Navbar />}
+      <Navbar />
       <Component {...pageProps} />
     </SessionProvider>
   );

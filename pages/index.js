@@ -27,9 +27,7 @@ export default function Home() {
             <h2 className="text-3xl font-bold mb-4">Welcome to Sigma Events!</h2>
             {session ? (
               <p className="text-gray-800">
-                You are logged in as{" "}
-                <span className="text-red-600">{session.user.email}</span> . View your
-                profile{" "}
+                You are logged in as <span className="text-red-600">{session.user.email}</span> . View your profile{" "}
                 <Link href="/setting" className="text-red-600">
                   here
                 </Link>

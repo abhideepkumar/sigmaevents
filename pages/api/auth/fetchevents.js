@@ -8,7 +8,7 @@ export default async function handler(req, res) {
         collection: "posted_events",
         database: "events",
         dataSource: "Cluster1",
-        filter: { },
+        filter: {},
       },
       {
         headers: {
