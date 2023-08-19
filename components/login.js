@@ -28,22 +28,7 @@ const Login = () => {
     <div className="flex items-center text-lg">
       {session ? (
         <>
-          <button
-            onClick={() => {
-              signOut("google", { callbackUrl: process.env.NEXTAUTH_URL });
-              const cookies = Cookies.get();
-              for (const cookie in cookies) {
-                Cookies.remove(cookie);
-              }
-            }}
-            className="px-4 py-2 bg-red-500 rounded-md text-white font-medium shadow hover:bg-red-600"
-          >
-            Sign out
-          </button>
-          <Link
-            href="/setting"
-            className="px-4 py-2 ml-4 bg-yellow-500 rounded-md text-white font-medium shadow hover:bg-yellow-600"
-          >
+          <Link href="/setting" className="px-4">
             Settings
           </Link>
         </>
@@ -54,7 +39,7 @@ const Login = () => {
           }}
           className="px-4 py-1 bg-blue-500 rounded-md text-white font-medium shadow hover:bg-blue-600"
         >
-          Login with Google
+          Login
         </button>
       )}
     </div>

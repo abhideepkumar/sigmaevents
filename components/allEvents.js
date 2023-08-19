@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
 import Cookies from "js-cookie";
+import Image from "next/image";
 
 const AllEvents = () => {
   const [events, setEvents] = useState([]);
@@ -58,42 +59,61 @@ const AllEvents = () => {
           <h1 className="text-2xl font-semibold text-gray-600">Loading... Please Wait</h1>
         ) : (
           events.map((event) => (
-            <div key={event._id} className="border border-gray-300 rounded-lg p-4 hover:bg-gray-100 transition">
-              <h2 className="text-xl font-semibold mb-2">{event.title || "Not Mentioned"}</h2>
-              <p className="text-gray-600">{event.date || "Not Mentioned"}</p>
-              <p className="mt-2">{event.desc || "Not Mentioned"}</p>
-              <p className="mt-2">
-                <strong>Location:</strong> {event.location?.type || "Not Mentioned"}
-              </p>
-              <p className="mt-2">
-                <strong>Deadline:</strong> {event.deadline || "Not Mentioned"}
-              </p>
-              <p className="mt-2">
-                <strong>Date:</strong> {event.date || "Not Mentioned"}
-              </p>
-              <p className="mt-2">
-                <strong>Time:</strong> {event.time || "Not Mentioned"}
-              </p>
-              {session && (
-                <button
-                  className={`mt-4 px-4 py-2 rounded-md hover:bg-blue-600 ${
-                    checkregister(event.registered)
-                      ? "bg-green-500 text-white hover:bg-green-600"
-                      : "bg-blue-500 text-white"
-                  }`}
-                  onClick={() => {
-                    if (confirm('Do you want to confirm Registration for the event  "' + event.title + `"`)) {
-                      handleRegister(event);
-                    } else {
-                      console.log("Registration cancelled");
-                    }
-                  }}
-                  disabled={checkregister(event.registered)}
-                >
-                  {checkregister(event.registered) ? "Registered" : "Register"}
-                </button>
+            <div
+              key={event._id}
+              className="bg-white rounded-lg p-4 hover:bg-emerald-50 transition shadow-lg hover:shadow-2xl flex flex-col justify-between"
+            >
+              <div className="aspect-video">
+                <Image
+                  src="https://source.unsplash.com/collection/8317102/1280x720"
+                  loader={() => "https://source.unsplash.com/collection/8317102/1280x720"}
+                  alt="Event Image"
+                  width={1280}
+                  height={720}
+                  className="rounded-lg"
+                />
+              </div>
+              <div>
+                <h2 className="mt-2 text-xl font-semibold">{event.title || "Not Mentioned"}</h2>
+                <p className="mt-2">{event.desc || "Not Mentioned"}</p>
+                <p className="text-gray-600 mt-2">on {event.date || "Not Mentioned"}</p>
+                <p className="mt-2">
+                  <strong>Location:</strong> {event.location?.type || "Not Mentioned"}
+                </p>
+                <p className="mt-2">
+                  <strong>Deadline:</strong> {event.deadline || "Not Mentioned"}
+                </p>
+                <p className="mt-2">
+                  <strong>Date:</strong> {event.date || "Not Mentioned"}
+                </p>
+                <p className="mt-2">
+                  <strong>Time:</strong> {event.time || "Not Mentioned"}
+                </p>
+              </div>
+              <div className="mt-4 flex justify-center">
+                {session && (
+                  <button
+                    className={`px-6 py-2 rounded-3xl hover:shadow-2xl ${
+                      checkregister(event.registered)
+                        ? "bg-green-900 text-white hover:bg-green-800"
+                        : "bg-black text-white shadow-md hover:shadow-2xl"
+                    }`}
+                    onClick={() => {
+                      if (confirm('Do you want to confirm Registration for the event  "' + event.title + `"`)) {
+                        handleRegister(event);
+                      } else {
+                        console.log("Registration cancelled");
+                      }
+                    }}
+                    disabled={checkregister(event.registered)}
+                  >
+                    {checkregister(event.registered) ? "Registered" : "Register"}
+                  </button>
+                )}
+              </div>
+              {!Allset && !session && (
+                <div className="text-red-600 mt-4">Login and fill data in settings to Register</div>
               )}
-              {!Allset && !session && <div className="text-red-600">Login and fill data in setting to Register</div>}
             </div>
           ))
         )}

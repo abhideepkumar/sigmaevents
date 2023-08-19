@@ -6,13 +6,7 @@ import User from "@/components/user";
 import Newuser from "@/components/newuser";
 const Setting = () => {
   const { data: session, status } = useSession();
-  return status !== "authenticated" ? (
-    <Access />
-  ) : Cookies.get("_id") !== undefined ? (
-    <User />
-  ) : (
-    <Newuser />
-  );
+  return status !== "authenticated" ? <Access /> : Cookies.get("_id") !== undefined ? <User /> : <Newuser />;
 };
 
 export default Setting;
