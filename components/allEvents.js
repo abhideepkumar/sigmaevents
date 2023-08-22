@@ -65,8 +65,8 @@ const AllEvents = () => {
             >
               <div className="aspect-video">
                 <Image
-                  src="https://source.unsplash.com/collection/8317102/1280x720"
-                  loader={() => "https://source.unsplash.com/collection/8317102/1280x720"}
+                  src="https://source.unsplash.com/collection/4510513/1280x720"
+                  loader={() => "https://source.unsplash.com/collection/4510513/1280x720"}
                   alt="Event Image"
                   width={1280}
                   height={720}
@@ -74,19 +74,19 @@ const AllEvents = () => {
                 />
               </div>
               <div>
-                <h2 className="mt-2 text-xl font-semibold">{event.title || "Not Mentioned"}</h2>
-                <p className="mt-2">{event.desc || "Not Mentioned"}</p>
-                <p className="text-gray-600 mt-2">on {event.date || "Not Mentioned"}</p>
-                <p className="mt-2">
+                <h2 className="mt-1 text-xl font-semibold">{event.title || "Not Mentioned"}</h2>
+                <p className="mt-1">{event.desc || "Not Mentioned"}</p>
+                <p className="mt-1 text-gray-600">on {event.date || "Not Mentioned"}</p>
+                <p className="mt-1">
                   <strong>Location:</strong> {event.location?.type || "Not Mentioned"}
                 </p>
-                <p className="mt-2">
+                <p className="mt-1">
                   <strong>Deadline:</strong> {event.deadline || "Not Mentioned"}
                 </p>
-                <p className="mt-2">
+                <p className="mt-1">
                   <strong>Date:</strong> {event.date || "Not Mentioned"}
                 </p>
-                <p className="mt-2">
+                <p className="mt-1">
                   <strong>Time:</strong> {event.time || "Not Mentioned"}
                 </p>
               </div>
@@ -95,7 +95,7 @@ const AllEvents = () => {
                   <button
                     className={`px-6 py-2 rounded-3xl hover:shadow-2xl ${
                       checkregister(event.registered)
-                        ? "bg-green-900 text-white hover:bg-green-800"
+                        ? "bg-green-700 text-white hover:bg-green-800"
                         : "bg-black text-white shadow-md hover:shadow-2xl"
                     }`}
                     onClick={() => {
@@ -111,9 +111,7 @@ const AllEvents = () => {
                   </button>
                 )}
               </div>
-              {!Allset && !session && (
-                <div className="text-red-600 mt-4">Login and fill data in settings to Register</div>
-              )}
+              {!Allset && !session && <div className="text-red-600">Login and fill data in settings to Register</div>}
             </div>
           ))
         )}
