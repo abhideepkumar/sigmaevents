@@ -65,11 +65,11 @@ const AllEvents = () => {
             >
               <div className="aspect-video">
                 <Image
-                  src="https://source.unsplash.com/collection/4510513/1280x720"
-                  loader={() => "https://source.unsplash.com/collection/4510513/1280x720"}
+                  src={`https://source.unsplash.com/480x360/?code?${event._id}`}
+                  loader={() => `https://source.unsplash.com/480x360/?code?${event._id}`}
                   alt="Event Image"
-                  width={1280}
-                  height={720}
+                  width={480}
+                  height={360}
                   className="rounded-lg"
                 />
               </div>
