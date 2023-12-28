@@ -1,38 +1,58 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+Welcome to Sigma Events! 🚀 This project is an easy-to-use website created to help students and clubs plan and participate in events hassle-free. It's built using Next.js, Tailwind CSS, and MongoDB. Let's dive into how you can get started!
 
-## Getting Started
+## What's Sigma Events?
 
-First, run the development server:
+Sigma Events is like a one-stop platform where students and clubs can organize and join events without any fuss. It's designed to make event planning and participation super simple. Here's why you might find it helpful:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+- 📅 **Clear Event Details**: All event information is neatly presented, so you won't miss any details.
+- ✏️ **No Repetitive Form Filling**: Say goodbye to filling in the same details for every event. Save time by entering your info just once!
+- 🔔 **Instant Event Notifications**: Stay up-to-date with instant event notifications so you never miss an exciting opportunity.
+- 📊 **Insights and Feedback**: Get insights about event attendance and gather valuable feedback for improvement.
+- 🔒 **Privacy-Focused**: No need to share your personal number like in WhatsApp groups.
+- 🕰️ **Easy Access to Past and Upcoming Events**: Find past events easily and plan for upcoming ones hassle-free.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Project Structure Overview
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+### Components Folder
+This folder holds different parts of the website:
+- **Access**: Deals with letting you log in to access the website.
+- **AllEvents**: Shows all the events available for you to check out and register for.
+- **Login**: Handles the process of logging in using Google.
+- **Navbar**: The menu bar you see at the top of the site for navigation.
+- **User** and **Newuser**: Display user details and manage completing your profile.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+### Pages Folder
+Here's where different pages of the website are located:
+- **_app.js** and **_document.js**: Basic setup for the website.
+- **events.js** and **setting.js**: These pages help display events and manage user settings.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+## Setting Up MongoDB
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Setting up MongoDB is like creating a space to store all the event and user-related data. Don't worry; it's easy!
+1. **Create MongoDB Atlas Account**: Sign up [here](https://www.mongodb.com/cloud/atlas) and make a cluster.
+2. **Get API Key and Connection URL**: Get a special code (API key) and link (connection URL) for your database.
+3. **Set Environment Variables**: Create a `.env.local` file and put in the special codes you received.
 
-## Learn More
+## Setting Up NextAuth with Google Console
 
-To learn more about Next.js, take a look at the following resources:
+NextAuth is a tool for handling logins. Here's how to set it up with Google:
+1. **Create a Google Cloud Platform Project**: Go to [Google Cloud Console](https://console.cloud.google.com/) and create a project.
+2. **Enable Google Authentication**: Click a few buttons in the console to set up Google login for your project.
+3. **Get Client ID and Secret**: You'll get special codes (Client ID and Secret) for linking your NextAuth with Google.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Running the Project Locally
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Let's try running Sigma Events on your computer!
+1. **Clone the Repository**: Copy the project to your computer using `git clone https://github.com/your-username/sigma-events.git`.
+2. **Install Dependencies**: Run `npm install` to get all the necessary bits and pieces.
+3. **Set Environment Variables**: Make a file called `.env.local` and put in the codes you got from MongoDB and Google.
+4. **Start the Project**: Run `npm run dev` in your terminal.
+5. **See Sigma Events**: Open your web browser and go to `http://localhost:3000`.
 
-## Deploy on Vercel
+## Contributing
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+We love contributions! Feel free to suggest improvements or even fix bugs by submitting issues or pull requests.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## License
+
+This project is licensed under the [MIT License](https://opensource.org/licenses/MIT). Feel free to use it however you like!
