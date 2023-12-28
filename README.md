@@ -43,12 +43,18 @@ NextAuth is a tool for handling logins. Here's how to set it up with Google:
 ## Running the Project Locally
 
 Let's try running Sigma Events on your computer!
-1. **Clone the Repository**: Copy the project to your computer using `git clone https://github.com/your-username/sigma-events.git`.
+1. **Clone the Repository**: Copy the project to your computer using `git clone https://github.com/abhideepkumar/sigmaevents.git`.
 2. **Install Dependencies**: Run `npm install` to get all the necessary bits and pieces.
 3. **Set Environment Variables**: Make a file called `.env.local` and put in the codes you got from MongoDB and Google.
 4. **Start the Project**: Run `npm run dev` in your terminal.
-5. **See Sigma Events**: Open your web browser and go to `http://localhost:3000`.
 
+## .env.local should have (setting this is optional if you are working on frontend)
+GOOGLE_CLIENT_ID
+GOOGLE_CLIENT_SECRET
+MONGO_API
+MONGO_KEY
+NEXTAUTH_SECRET
+NEXTAUTH_URL
 ## Contributing
 
 We love contributions! Feel free to suggest improvements or even fix bugs by submitting issues or pull requests.
