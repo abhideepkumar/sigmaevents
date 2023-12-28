@@ -1,10 +1,16 @@
 import axios from "axios";
+
 export default async function handler(req, res) {
+  // Retrieve data from the request body
   const data = req.body;
-  console.log("data received", data);
+  console.log("Data received:", data);
+
   try {
+    // Construct the URL for inserting data
     const iUrl = `${process.env.MONGO_API}insertOne`;
-    console.log("Url is: ", iUrl);
+    console.log("URL:", iUrl);
+
+    // Send a POST request to insert data into the MongoDB collection
     const response = await axios.post(
       iUrl,
       {
@@ -12,6 +18,7 @@ export default async function handler(req, res) {
         database: "profiles",
         dataSource: "Cluster1",
         document: {
+          // Extract data from the request body
           name: data.name,
           USN: data.USN,
           email: data.email,
@@ -30,10 +37,13 @@ export default async function handler(req, res) {
         },
       }
     );
-    console.log("response after sending: ", response.data);
+
+    console.log("Response after sending:", response.data);
+
+    // Send a success response with the data returned from the MongoDB insertion
     res.status(200).json(response.data);
   } catch (error) {
-    console.log("error data sent: ", data);
+    // Log the error and send a server error response
     console.error("Error uploading user data:", error);
     res.status(500).end();
   }

@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import { useSession } from "next-auth/react";
 import Cookies from "js-cookie";
+
 const Newuser = () => {
   const { data: session } = useSession();
+
+  // State to manage form data
   const [formData, setFormData] = useState({
     name: "",
     USN: "",
@@ -12,10 +15,11 @@ const Newuser = () => {
     college: "",
     passoutYear: "",
   });
+
+  // Function to handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      // console.log("You saved", formData);
       const response = await fetch("/api/auth/adduser", {
         method: "POST",
         headers: {
@@ -25,18 +29,20 @@ const Newuser = () => {
         body: JSON.stringify(formData),
       });
       if (response.ok) {
-        console.log("Data sent successfully!");
+        // If data is sent successfully, update cookies and redirect
         Object.keys(formData).forEach((key) => {
           Cookies.set(key, formData[key], 30);
         });
         window.location.replace("/");
       } else {
-        console.log("response: ", response.data);
+        console.log("Error in response: ", response.data);
       }
     } catch (err) {
-      console.error("Error saving data from catch block", err);
+      console.error("Error saving data: ", err);
     }
   };
+
+  // Function to handle form input changes
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevFormData) => ({
@@ -128,7 +134,13 @@ const Newuser = () => {
               className="mt-1 p-2 block w-full border border-gray-200  rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
             />
           </div>
-            <p className="text-red-600">After saving, You need to contact us on email <span className="text-blue-600">returncode1@gmail.com</span> to make changes</p>
+          {/* Additional note for the user */}
+          <p className="text-red-600">
+            After saving, You need to contact us on email{" "}
+            <span className="text-blue-600">returncode1@gmail.com</span> to make changes
+          </p>
+
+          {/* Submit button */}
           <div className="flex justify-center">
             <button
               type="submit"

@@ -3,6 +3,7 @@ import { useSession, signOut } from "next-auth/react";
 import Cookies from "js-cookie";
 
 const User = () => {
+  // Fetch user details from cookies or display default values
   const name = Cookies.get("name") || "Can't Fetch";
   const email = Cookies.get("email") || "Can't Fetch";
   const usn = Cookies.get("USN") || "Can't Fetch";
@@ -15,6 +16,7 @@ const User = () => {
     <div className="min-h-screen bg-gray-100 flex items-center justify-center">
       <div className="bg-white p-8 rounded-lg shadow-md max-w-md w-full">
         <h2 className="text-2xl font-semibold mb-4">Welcome, {name}</h2>
+        {/* Display user information */}
         <div className="mb-4">
           <p className="font-semibold">Email</p>
           <p className="text-gray-600">{email}</p>
@@ -39,8 +41,10 @@ const User = () => {
           <p className="font-semibold">Passout Year</p>
           <p className="text-gray-600">{passoutYear}</p>
         </div>
+        {/* Button to sign out user */}
         <button
           onClick={() => {
+            // Sign out user and remove all cookies
             signOut("google", { callbackUrl: process.env.NEXTAUTH_URL });
             const cookies = Cookies.get();
             for (const cookie in cookies) {
