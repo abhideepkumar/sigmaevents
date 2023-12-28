@@ -33,11 +33,14 @@ const Login = () => {
   };
 
   return (
-    <div className="flex items-center text-lg">
+    <div className="flex items-center">
       {session ? (
         // Display settings link if the user is logged in
-        <Link href="/setting" className="px-4">
-          Settings
+        <Link
+          href="/setting"
+          className="font-extrabold text-sm opacity-50 hover:opacity-100 transition-opacity duration-200"
+        >
+          SETTINGS
         </Link>
       ) : (
         // Display login button if the user is not logged in
@@ -45,9 +48,9 @@ const Login = () => {
           onClick={() => {
             signIn("google", process.env.NEXTAUTH_URL);
           }}
-          className="px-4 py-1 bg-blue-500 rounded-md text-white font-medium shadow hover:bg-blue-600"
+          className="font-extrabold text-sm border border-black px-8 py-2 hover:bg-black hover:text-white transition-colors duration-200"
         >
-          Login
+          LOGIN
         </button>
       )}
     </div>
