@@ -1,64 +1,42 @@
-Welcome to Sigma Events! 🚀 This project is an easy-to-use website created to help students and clubs plan and participate in events hassle-free. It's built using Next.js, Tailwind CSS, and MongoDB. Let's dive into how you can get started!
+**README for Sigma Events Admin Portal**
 
-## What's Sigma Events?
+This is a Next.js project for the Sigma Events admin portal, a website where all the college clubs can post their future events and acts like a centralized platform for all the clubs for the students.
+This Website using Tailwind CSS for styling.
+This Website is using MongoDB Atlas for database.
 
-Sigma Events is like a one-stop platform where students and clubs can organize and join events without any fuss. It's designed to make event planning and participation super simple. Here's why you might find it helpful:
+You can visit the website by going to [`Admin Sigma Events`](https://sigmaforclubs.netlify.app/) which is hosted on Netlify.
+and the website that is the interface for students is [`Sigma Events`](https://sigmaevents.netlify.app/)
 
-- 📅 **Clear Event Details**: All event information is neatly presented, so you won't miss any details.
-- ✏️ **No Repetitive Form Filling**: Say goodbye to filling in the same details for every event. Save time by entering your info just once!
-- 🔔 **Instant Event Notifications**: Stay up-to-date with instant event notifications so you never miss an exciting opportunity.
-- 📊 **Insights and Feedback**: Get insights about event attendance and gather valuable feedback for improvement.
-- 🔒 **Privacy-Focused**: No need to share your personal number like in WhatsApp groups.
-- 🕰️ **Easy Access to Past and Upcoming Events**: Find past events easily and plan for upcoming ones hassle-free.
+Through this admin portal you can:
 
-## Project Structure Overview
+* Login to your club account
+* Access Dashboard showing all the events
+* Add New events
+* post event details
 
-### Components Folder
-This folder holds different parts of the website:
-- **Access**: Deals with letting you log in to access the website.
-- **AllEvents**: Shows all the events available for you to check out and register for.
-- **Login**: Handles the process of logging in using Google.
-- **Navbar**: The menu bar you see at the top of the site for navigation.
-- **User** and **Newuser**: Display user details and manage completing your profile.
 
-### Pages Folder
-Here's where different pages of the website are located:
-- **_app.js** and **_document.js**: Basic setup for the website.
-- **events.js** and **setting.js**: These pages help display events and manage user settings.
+## Installation
 
-## Setting Up MongoDB
+To install and run this project, you need to have the following:
 
-Setting up MongoDB is like creating a space to store all the event and user-related data. Don't worry; it's easy!
-1. **Create MongoDB Atlas Account**: Sign up [here](https://www.mongodb.com/cloud/atlas) and make a cluster.
-2. **Get API Key and Connection URL**: Get a special code (API key) and link (connection URL) for your database.
-3. **Set Environment Variables**: Create a `.env.local` file and put in the special codes you received.
+- Node.js and npm installed on your machine. You can check your versions by running `node -v` and `npm -v` in your terminal.
+- A GitHub account and Git installed on your machine. You can check your Git version by running `git --version` in your terminal.
 
-## Setting Up NextAuth with Google Console
+Then, follow these steps:
 
-NextAuth is a tool for handling logins. Here's how to set it up with Google:
-1. **Create a Google Cloud Platform Project**: Go to [Google Cloud Console](https://console.cloud.google.com/) and create a project.
-2. **Enable Google Authentication**: Click a few buttons in the console to set up Google login for your project.
-3. **Get Client ID and Secret**: You'll get special codes (Client ID and Secret) for linking your NextAuth with Google.
+1. Fork this repository to your GitHub account by clicking the Fork button on the top right corner of this page.
+2. Clone your forked repository to your local machine by running `git clone https://github.com/abhideepkumar/adminsigma.git`
+3. Navigate to the project directory by running `cd adminsigma` in your terminal.
+4. Install the dependencies by running `npm install` in your terminal.
+5. Start the development server by running `npm run dev` in your terminal.
+6. Open your browser and go to `http://localhost:3000` to view the admin portal.
 
-## Running the Project Locally
-
-Let's try running Sigma Events on your computer!
-1. **Clone the Repository**: Copy the project to your computer using `git clone https://github.com/abhideepkumar/sigmaevents.git`.
-2. **Install Dependencies**: Run `npm install` to get all the necessary bits and pieces.
-3. **Set Environment Variables**: Make a file called `.env.local` and put in the codes you got from MongoDB and Google.
-4. **Start the Project**: Run `npm run dev` in your terminal.
-
-## .env.local should have (setting this is optional if you are working on frontend)
-GOOGLE_CLIENT_ID
-GOOGLE_CLIENT_SECRET
-MONGO_API
-MONGO_KEY
-NEXTAUTH_SECRET
-NEXTAUTH_URL
 ## Contributing
+We are open to contributions to this project. If you would like to contribute, please feel free to submit a pull request.
+You can clone the repository and then add any features like Filter events by category, Search events, etc.
+If you are familiar with MongoDB data api, you can add feature to delete events.
 
-We love contributions! Feel free to suggest improvements or even fix bugs by submitting issues or pull requests.
-
-## License
-
-This project is licensed under the [MIT License](https://opensource.org/licenses/MIT). Feel free to use it however you like!
+## Images of the project
+![Image1](https://github.com/abhideepkumar/adminsigma/blob/master/public/img/Screenshot%20(2).png)
+![Image2](https://github.com/abhideepkumar/adminsigma/blob/master/public/img/Screenshot%20(3).png)
+![Image3](https://github.com/abhideepkumar/adminsigma/blob/master/public/img/Screenshot%20(4).png)

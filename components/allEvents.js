@@ -1,62 +1,25 @@
-import React, { useState, useEffect } from "react";
-import { useSession } from "next-auth/react";
-import Cookies from "js-cookie";
-import Image from "next/image";
-
+import React, { useEffect, useState } from "react";
+import Link from "next/link";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
 const AllEvents = () => {
-  const [events, setEvents] = useState([]);
+  const [EventAll, setEventAll] = useState([]);
   const [loading, setLoading] = useState(true);
-  const { data: session } = useSession();
-  const userId = Cookies.get("_id");
-  let Allset = userId !== undefined;
 
   useEffect(() => {
-    // Fetch events from the API
-    fetchEvents();
-  }, []);
-
-  // Function to fetch events data
-  const fetchEvents = () => {
-    fetch("/api/auth/fetchevents")
+    fetch("/api/fetchevents")
       .then((response) => response.json())
       .then((data) => {
-        const eventsData = data.documents.reverse();
-        setEvents(eventsData);
+        const reversed_data = data.documents.reverse();
+        setEventAll(reversed_data);
         setLoading(false);
       })
       .catch((error) => {
-        console.error("Error while fetching events data:", error);
+        console.error("Error while fetching user data:", error);
         setLoading(false);
+        alert("Some Error occurred, Try refreshing/relogin the page");
       });
-  };
-
-  // Function to check if the user is registered for an event
-  const checkRegister = (eventRegistered) => {
-    for (let i = 0; i < eventRegistered.length; i++) {
-      for (let j = 0; j < eventRegistered[i].length; j++) {
-        const objId = eventRegistered[i][j];
-        if (objId["$id"] === userId) {
-          return true;
-        }
-      }
-    }
-    return false;
-  };
-
-  // Function to handle event registration
-  const handleRegister = async (event) => {
-    try {
-      const response = await fetch(`/api/auth/register?eventId=${event._id}&userId=${userId}`);
-      if (response.ok) {
-        window.location.reload();
-      } else {
-        console.log("Registration failed for event:", event.name);
-        console.log("Response from server failed", response.data);
-      }
-    } catch (error) {
-      console.error("Error while registering:", error);
-    }
-  };
+  }, []);
 
   return (
     <main className="container p-4 mx-auto">
@@ -65,68 +28,40 @@ const AllEvents = () => {
         {loading ? (
           <h1 className="text-2xl font-semibold text-gray-600">Loading... Please Wait</h1>
         ) : (
-          events.map((event) => (
+          EventAll.map((event) => (
             <div
               key={event._id}
-              className="bg-white rounded-lg p-4 hover:bg-emerald-50 transition shadow-lg hover:shadow-2xl flex flex-col justify-between"
+              className="bg-white rounded-lg p-4 hover:bg-yellow-50 transition shadow-lg hover:shadow-2xl flex flex-col justify-between"
             >
-              <div className="aspect-video">
-                {/* Display event image */}
-                <Image
-                  src={`https://source.unsplash.com/480x360/?code?${event._id}`}
-                  loader={() => `https://source.unsplash.com/480x360/?code?${event._id}`}
-                  alt="Event Image"
-                  width={480}
-                  height={360}
-                  className="rounded-lg"
-                />
-              </div>
-              {/* Display event details */}
               <div>
-                <h2 className="mt-1 text-xl font-semibold">{event.title || "Not Mentioned"}</h2>
-                <p className="mt-1">{event.desc || "Not Mentioned"}</p>
-                <p className="mt-1 text-gray-600">on {event.date || "Not Mentioned"}</p>
-                <p className="mt-1">
+                <h2 className="mt-2 text-xl font-semibold">{event.title || "Not Mentioned"}</h2>
+                <p className="mt-2">{event.desc || "Not Mentioned"}</p>
+                <p className="text-gray-600 mt-2">on {event.date || "Not Mentioned"}</p>
+                <p className="mt-2">
                   <strong>Location:</strong> {event.location?.type || "Not Mentioned"}
+                  {"  "}
+                  <Link href={event.location?.link}>
+                    <FontAwesomeIcon icon={faArrowUpRightFromSquare} />
+                  </Link>
                 </p>
-                <p className="mt-1">
+                <p className="mt-2">
                   <strong>Deadline:</strong> {event.deadline || "Not Mentioned"}
                 </p>
-                <p className="mt-1">
+                <p className="mt-2">
                   <strong>Date:</strong> {event.date || "Not Mentioned"}
                 </p>
-                <p className="mt-1">
+                <p className="mt-2">
                   <strong>Time:</strong> {event.time || "Not Mentioned"}
                 </p>
+                <p className="mt-2">
+                  <strong>No of Registeration:</strong> {event.registered.length}
+                </p>
               </div>
-              {/* Register button */}
-              <div className="mt-4 flex justify-center">
-                {session && (
-                  <button
-                    className={`px-6 py-2 rounded-3xl hover:shadow-2xl ${
-                      checkRegister(event.registered)
-                        ? "bg-green-700 text-white hover:bg-green-800"
-                        : "bg-black text-white shadow-md hover:shadow-2xl"
-                    }`}
-                    onClick={() => {
-                      if (confirm('Do you want to confirm Registration for the event "' + event.title + `"`)) {
-                        handleRegister(event);
-                      } else {
-                        console.log("Registration cancelled");
-                      }
-                    }}
-                    disabled={checkRegister(event.registered)}
-                  >
-                    {checkRegister(event.registered) ? "Registered" : "Register"}
-                  </button>
-                )}
-              </div>
-              {/* Display message for users to login and fill data in settings */}
-              {!Allset && !session && (
-                <div className="text-red-600">Login and fill data in settings to Register</div>
-              )}
             </div>
           ))
+        )}
+        {!loading && Object.keys(EventAll).length === 0 && (
+          <h1 className="text-2xl font-semibold text-gray-600">No Events. Starts scheduling your events</h1>
         )}
       </div>
     </main>
