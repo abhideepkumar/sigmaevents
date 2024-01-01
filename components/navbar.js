@@ -7,14 +7,17 @@ const Navbar = () => {
   return (
     <>
       <div className="lg:hidden flex justify-between items-center p-6 theme">
-        <Image
+       <Link href="/">
+       <Image
           href="/"
           src="/logo.svg"
           width={125}
           height={125}
           alt="logo"
           className="mix-blend-multiply"
-        />
+            /> 
+        </Link>
+       
         <div className="flex gap-6 items-center">
           <Login />
           <Image
