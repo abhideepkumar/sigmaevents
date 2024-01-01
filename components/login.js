@@ -3,6 +3,7 @@ import { useSession, signIn } from "next-auth/react";
 import Link from "next/link";
 import React, { useEffect } from "react";
 import { useRouter } from "next/router";
+import Image from "next/image";
 
 const Login = () => {
   const router = useRouter();
@@ -33,11 +34,18 @@ const Login = () => {
   };
 
   return (
-    <div className="flex items-center text-lg">
+    <div className="flex items-center">
       {session ? (
         // Display settings link if the user is logged in
-        <Link href="/setting" className="px-4">
-          Settings
+        <Link href="/setting" className="">
+          <Image
+            href="/"
+            src="/profile.svg"
+            width={0}
+            height={0}
+            alt="settings"
+            className="w-6"
+          />
         </Link>
       ) : (
         // Display login button if the user is not logged in
@@ -45,9 +53,9 @@ const Login = () => {
           onClick={() => {
             signIn("google", process.env.NEXTAUTH_URL);
           }}
-          className="px-4 py-1 bg-blue-500 rounded-md text-white font-medium shadow hover:bg-blue-600"
+          className="font-extrabold text-xs lg:text-sm border border-black px-4 py-1 lg:px-8 lg:py-2 hover:bg-black hover:text-white transition-colors duration-200"
         >
-          Login
+          LOGIN
         </button>
       )}
     </div>
