@@ -51,12 +51,12 @@ const Newuser = () => {
     }));
   };
   return (
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 flex-col">
-      <div className="max-w-md w-full p-6 bg-white rounded-lg shadow-lg">
-        <h2 className="text-2xl font-semibold mb-6">Complete Your Profile</h2>
+    <div className="min-h-screen bg-gray-100 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 flex-col dark:bg-slate-800">
+      <div className="max-w-md w-full p-6 bg-white rounded-lg shadow-lg dark:bg-slate-700">
+        <h2 className="text-2xl font-semibold mb-6 dark:text-white">Complete Your Profile</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label htmlFor="name" className="block text-gray-700 font-medium">
+            <label htmlFor="name" className="block text-gray-700 font-medium dark:text-white">
               Name:
             </label>
             <input
@@ -65,11 +65,11 @@ const Newuser = () => {
               value={formData.name}
               onChange={handleChange}
               required
-              className="mt-1 p-2 block w-full border border-gray-200  rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              className="mt-1 p-2 block w-full border dark:text-black dark:font-bold border-gray-200  rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
             />
           </div>
           <div>
-            <label htmlFor="USN" className="block text-gray-700 font-medium">
+            <label htmlFor="USN" className="block text-gray-700 font-medium dark:text-white">
               USN:
             </label>
             <input
@@ -78,12 +78,12 @@ const Newuser = () => {
               value={formData.USN}
               onChange={handleChange}
               required
-              className="mt-1 p-2 block w-full border border-gray-200  rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              className="mt-1 p-2 block w-full border border-gray-200   dark:font-bold rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
             />
           </div>
           <div></div>
           <div>
-            <label htmlFor="phoneNo" className="block text-gray-700 font-medium">
+            <label htmlFor="phoneNo" className="block text-gray-700 font-medium dark:text-white">
               Phone Number(without +91):
             </label>
             <input
@@ -92,11 +92,11 @@ const Newuser = () => {
               value={formData.phoneNo}
               onChange={handleChange}
               required
-              className="mt-1 p-2 block w-full border border-gray-200  rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              className="mt-1 p-2 block w-full border border-gray-200    dark:font-bold rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
             />
           </div>
           <div>
-            <label htmlFor="branch" className="block text-gray-700 font-medium">
+            <label htmlFor="branch" className="block text-gray-700 font-medium dark:text-white">
               Branch:
             </label>
             <input
@@ -105,11 +105,11 @@ const Newuser = () => {
               value={formData.branch}
               onChange={handleChange}
               required
-              className="mt-1 p-2 block w-full border border-gray-200  rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              className="mt-1 p-2 block w-full border border-gray-200   dark:font-bold rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
             />
           </div>
           <div>
-            <label htmlFor="college" className="block text-gray-700 font-medium">
+            <label htmlFor="college" className="block text-gray-700 font-medium dark:text-white">
               College:
             </label>
             <input
@@ -118,11 +118,11 @@ const Newuser = () => {
               value={formData.college}
               onChange={handleChange}
               required
-              className="mt-1 p-2 block w-full border border-gray-200  rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              className="mt-1 p-2 block w-full border border-gray-200   dark:font-bold rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
             />
           </div>
           <div>
-            <label htmlFor="passoutYear" className="block text-gray-700 font-medium">
+            <label htmlFor="passoutYear" className="block text-gray-700 font-medium dark:text-white">
               Pass Out Year:
             </label>
             <input
@@ -131,13 +131,13 @@ const Newuser = () => {
               value={formData.passoutYear}
               onChange={handleChange}
               required
-              className="mt-1 p-2 block w-full border border-gray-200  rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              className="mt-1 p-2 block w-full border border-gray-200   dark:font-bold rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
             />
           </div>
           {/* Additional note for the user */}
-          <p className="text-red-600">
+          <p className="text-red-600 dark:text-green-300">
             After saving, You need to contact us on email{" "}
-            <span className="text-blue-600">returncode1@gmail.com</span> to make changes
+            <span className="text-blue-600 dark:text-red-300">returncode1@gmail.com</span> to make changes
           </p>
 
           {/* Submit button */}

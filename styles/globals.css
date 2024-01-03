@@ -3,8 +3,9 @@
 @tailwind utilities;
 body {
   font-family: "Quicksand Variable", sans-serif;
-  @apply bg-gray-100;
+  @apply bg-gray-100 dark:bg-slate-800;
 }
 .theme {
   background-color: #e8f8f3;
 }
+

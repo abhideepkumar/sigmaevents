@@ -8,7 +8,7 @@ export default function Home() {
   const { data: session } = useSession();
 
   return (
-    <main className="theme w-full">
+    <main className=" theme w-full dark:bg-slate-800">
       <section className="container py-8 px-6">
         <div className="flex flex-col md:flex-row gap-6">
           {/* Display a welcome image */}
@@ -19,33 +19,35 @@ export default function Home() {
               alt="Welcome Image"
               width={500}
               height={500}
-              className="rounded-lg"
+              className="rounded-lg dark:border-green-300 dark:border-[1px]"
               priority={true}
             />
           </div>
           {/* Display welcome message and profile link */}
           <div className="md:w-1/2 flex flex-col justify-center text-center md:text-left">
-            <h2 className="text-3xl font-bold mb-4">Welcome to Sigma Events!</h2>
+            <h2 className="text-3xl font-bold mb-4 dark:text-white">Welcome to Sigma Events!</h2>
             {/* Check if the user is logged in */}
             {session ? (
               // If logged in, display user's email and profile link
               <p className="text-gray-800">
-                You are logged in as <span className="text-red-600">{session.user.email}</span>. View your profile{" "}
-                <Link href="/setting" className="text-red-600">
+               <span className=" dark:text-white">You are logged in as </span>  <span className="text-red-600">{session.user.email}</span> <span className=" dark:text-white">
+                  . View your profile{" "}
+                  </span>
+                <Link href="/setting" className="text-red-600" >
                   here
                 </Link>
               </p>
             ) : (
               // If not logged in, prompt to login
-              <p className="text-gray-800">Login to create or view your profile.</p>
+              <p className="text-gray-800  dark:text-red-900">Login to create or view your profile.</p>
             )}
           </div>
         </div>
       </section>
       {/* Display footer */}
-      <footer className="bg-emerald-300 py-4">
+      <footer className="bg-emerald-300  py-12 dark:bg-slate-800">
         <div className="container mx-auto px-6 text-center">
-          <p>&copy; {new Date().getFullYear()} Sigma Events. Some rights reserved.</p>
+          <p className=" dark:text-emerald-300">&copy; {new Date().getFullYear()} Sigma Events. Some rights reserved.</p>
         </div>
       </footer>
     </main>

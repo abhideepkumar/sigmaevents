@@ -13,33 +13,33 @@ const User = () => {
   const passoutYear = Cookies.get("LastYear") || "Can't Fetch";
 
   return (
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center">
+    <div className="min-h-screen bg-gray-100 flex items-center justify-center dark:bg-slate-800">
       <div className="bg-white p-8 rounded-lg shadow-md max-w-md w-full">
-        <h2 className="text-2xl font-semibold mb-4">Welcome, {name}</h2>
+        <h2 className="text-2xl font-semibold mb-4 dark:text-white">Welcome, {name}</h2>
         {/* Display user information */}
         <div className="mb-4">
-          <p className="font-semibold">Email</p>
-          <p className="text-gray-600">{email}</p>
+          <p className="font-semibold dark:text-white">Email</p>
+          <p className="text-gray-600 dark:text-gray-200">{email}</p>
         </div>
         <div className="mb-4">
-          <p className="font-semibold">USN</p>
-          <p className="text-gray-600">{usn}</p>
+          <p className="font-semibold dark:text-white">USN</p>
+          <p className="text-gray-600 dark:text-gray-200">{usn}</p>
         </div>
         <div className="mb-4">
-          <p className="font-semibold">Phone No</p>
-          <p className="text-gray-600">{phoneNo}</p>
+          <p className="font-semibold dark:text-white">Phone No</p>
+          <p className="text-gray-600 dark:text-gray-200">{phoneNo}</p>
         </div>
         <div className="mb-4">
-          <p className="font-semibold">Branch</p>
-          <p className="text-gray-600">{branch}</p>
+          <p className="font-semibold dark:text-white">Branch</p>
+          <p className="text-gray-600 dark:text-gray-200">{branch}</p>
         </div>
         <div className="mb-4">
-          <p className="font-semibold">College</p>
-          <p className="text-gray-600">{college}</p>
+          <p className="font-semibold dark:text-white">College</p>
+          <p className="text-gray-600 dark:text-gray-200">{college}</p>
         </div>
         <div className="mb-6">
-          <p className="font-semibold">Passout Year</p>
-          <p className="text-gray-600">{passoutYear}</p>
+          <p className="font-semibold dark:text-white">Passout Year</p>
+          <p className="text-gray-600 dark:text-gray-200">{passoutYear}</p>
         </div>
         {/* Button to sign out user */}
         <button
