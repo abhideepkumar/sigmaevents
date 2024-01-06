@@ -62,9 +62,21 @@ const AllEvents = () => {
     <main className="container p-4 mx-auto">
       <h1 className="text-3xl font-bold mb-6">Events</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {loading ? (
-          <h1 className="text-2xl font-semibold text-gray-600">Loading... Please Wait</h1>
-        ) : (
+        {loading ? Array(3).fill(0).map((event, id) => (
+          <div key={id} className="bg-white rounded-lg p-4 hover:bg-emerald-50 transition shadow-lg hover:shadow-2xl flex flex-col justify-between animate-pulse">
+            <div className="h-80 w-auto bg-gray-400 rounded-lg"></div>
+            <div className="px-6 py-4">
+              <div className="h-6 bg-gray-300 mb-2"></div>
+              <div className="h-4 bg-gray-300 w-2/3"></div>
+            </div>
+            <div className="px-6 pt-4 pb-2">
+              <div className="h-4 bg-gray-300 w-1/4 mb-2"></div>
+              <div className="h-4 bg-gray-300 w-1/2 mb-2"></div>
+              <div className="h-4 bg-gray-300 w-1/4 mb-2"></div>
+              <div className="h-4 bg-gray-300 w-1/2"></div>
+            </div>
+          </div>
+        )) : (
           events.map((event) => (
             <div
               key={event._id}
@@ -103,11 +115,10 @@ const AllEvents = () => {
               <div className="mt-4 flex justify-center">
                 {session && (
                   <button
-                    className={`px-6 py-2 rounded-3xl hover:shadow-2xl ${
-                      checkRegister(event.registered)
-                        ? "bg-green-700 text-white hover:bg-green-800"
-                        : "bg-black text-white shadow-md hover:shadow-2xl"
-                    }`}
+                    className={`px-6 py-2 rounded-3xl hover:shadow-2xl ${checkRegister(event.registered)
+                      ? "bg-green-700 text-white hover:bg-green-800"
+                      : "bg-black text-white shadow-md hover:shadow-2xl"
+                      }`}
                     onClick={() => {
                       if (confirm('Do you want to confirm Registration for the event "' + event.title + `"`)) {
                         handleRegister(event);
