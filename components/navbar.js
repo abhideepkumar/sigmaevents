@@ -44,6 +44,13 @@ const Navbar = () => {
               <Link href="/" className="font-extrabold text-sm" onClick={closeMenu}>
                 HOME
               </Link>
+              <Link
+                href="/about"
+                className="font-extrabold text-sm"
+                onClick={closeMenu}
+              >
+                ABOUT
+              </Link>
               <Link href="/events" className="font-extrabold text-sm" onClick={closeMenu}>
                 EVENTS
               </Link>
@@ -68,6 +75,12 @@ const Navbar = () => {
             className="font-extrabold text-sm opacity-50 hover:opacity-100 transition-opacity duration-200"
           >
             HOME
+          </Link>
+          <Link
+            href="/about"
+            className="font-extrabold text-sm opacity-50 hover:opacity-100 transition-opacity duration-200"
+          >
+            ABOUT
           </Link>
           <Link
             href="/events"
