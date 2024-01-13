@@ -11,11 +11,11 @@ export default function About() {
 
 
     return (
-        <main className="theme w-full">
+        <main className="theme w-full dark:bg-slate-800">
             {/* HERO WELCOME SECTION */}
-            <section className="py-8 px-12">
+            <section className="py-8 px-12 ">
 
-                <div className="flex flex-col md:flex-row gap-6 items-stretch justify-between">
+                <div className="flex flex-col md:flex-row gap-6 items-stretch justify-between dark:text-white">
                     <div className="md:w-1/2 flex flex-col items-start text-left justify-center">
                         <h1 className="text-4xl font-bold">Welcome to Sigma Events</h1>
                         <h2 className="text-2xl">Stress-free student events management</h2>
@@ -41,7 +41,7 @@ export default function About() {
             </section>
 
             {/* OUR MISSION */}
-            <section className="py-8 px-16 text-center flex flex-col items-center">
+            <section className="py-8 px-16 text-center flex flex-col items-center  dark:text-white ">
                 <h1 className="text-3xl font-semibold mb-2">Our Mission</h1>
                 <p className="w-3/4">
                     At Sigma Events, our mission is clear and passionate: to empower students and clubs by revolutionizing the way events are organized and experienced. We are committed to providing a platform that takes the complexity out of event management, allowing you to focus on what truly matters - creating memorable moments.
@@ -52,8 +52,8 @@ export default function About() {
             <section className="py-8 px-16">
                 <div className="flex flex-col md:flex-row gap-6 items-stretch justify-between">
                     <div className="md:w-1/2 flex flex-col items-start text-left justify-center">
-                        <h1 className="text-3xl font-semibold mb-2">Why Sigma?</h1>
-                        <p className="text-lg">At Sigma Events, we&apos;re on a mission to transform the event experience for students and clubs. Our approach is simple yet powerful - we embrace innovation to provide a seamless and user-friendly platform that empowers you to create, organize, and participate in events with unparalleled ease.</p>
+                        <h1 className="text-3xl font-semibold mb-2  dark:text-white">Why Sigma?</h1>
+                        <p className="text-lg  dark:text-white">At Sigma Events, we&apos;re on a mission to transform the event experience for students and clubs. Our approach is simple yet powerful - we embrace innovation to provide a seamless and user-friendly platform that empowers you to create, organize, and participate in events with unparalleled ease.</p>
                         <CTAButton text="Start Now" href="#" />
                     </div>
 
