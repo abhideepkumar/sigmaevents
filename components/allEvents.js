@@ -65,7 +65,7 @@ const AllEvents = () => {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
       {loading ? Array(3).fill(0).map((event, id) => (
           <div key={id} className="bg-white rounded-lg p-4 hover:bg-emerald-50 transition shadow-lg hover:shadow-2xl flex flex-col justify-between animate-pulse">
-            <div className="h-80 w-auto bg-gray-400 rounded-lg"></div>
+            <div className="h-52 w-auto bg-gray-400 rounded-lg"></div>
             <div className="px-6 py-4">
               <div className="h-6 bg-gray-300 mb-2"></div>
               <div className="h-4 bg-gray-300 w-2/3"></div>
@@ -83,7 +83,7 @@ const AllEvents = () => {
               key={event._id}
               className="bg-white rounded-lg p-4 hover:bg-emerald-50 transition shadow-lg hover:shadow-2xl flex flex-col justify-between"
             >
-              <div className="aspect-video">
+              <div className="">
                 {/* Display event image */}
                 <Image
                   src={`https://source.unsplash.com/480x360/?code?${event._id}`}
@@ -93,7 +93,7 @@ const AllEvents = () => {
                   alt="Event Image"
                   width={480}
                   height={360}
-                  className="rounded-lg"
+                  className="rounded-lg aspect-video"
                 />
               </div>
               {/* Display event details */}
