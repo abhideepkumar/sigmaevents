@@ -168,7 +168,7 @@ const AllEvents = () => {
               )}
             </div>
           ))
-        )}
+        )}{" "}
       </div>
     </main>
   );
