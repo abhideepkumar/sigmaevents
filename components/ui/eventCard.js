@@ -41,6 +41,12 @@ export default function EventCard({ event }) {
     <div className="border text-card-foreground max-w-md bg-white rounded-xl overflow-hidden md:max-w-2xl m-4 flex flex-col items-center shadow-2xl transition duration-500 ease-in-out transform hover:-translate-y-5 hover:scale-104">
       <div className="relative w-full">
         {/* Display event image */}
+        {events.map((event) => (
+       <div key={event.id}>
+          {/* Render event details */}
+      </div>
+))}
+
         <div className="aspect-video m-5">
           {/* Display event image */}
           <Image
