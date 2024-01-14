@@ -57,7 +57,7 @@ const Login = () => {
           onClick={() => {
             signIn("google", { callbackUrl: process.env.NEXTAUTH_URL });
           }}
-          className="font-extrabold text-xs lg:text-sm border border-black px-4 py-1 lg:px-8 lg:py-2 hover:bg-black hover:text-white transition-colors duration-200"
+          className="font-extrabold text-xs lg:text-sm border border-black px-4 py-1 lg:px-8 lg:py-2 hover:bg-black hover:text-white transition-colors duration-200  dark:bg-white dark:hover:bg-slate-700"
         >
           LOGIN
         </button>
