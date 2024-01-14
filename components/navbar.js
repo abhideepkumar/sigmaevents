@@ -24,7 +24,7 @@ const Navbar = () => {
           width={125}
           height={125}
           alt="logo"
-          className="mix-blend-multiply"
+          className="mix-blend-screen p-1 rounded dark:shadow-xl  dark:bg-white"
         />
         <div className="flex gap-6 items-center">
           <Login />
@@ -39,7 +39,7 @@ const Navbar = () => {
           <div
             className={`${
               menuOpen ? "block" : "hidden"
-            } absolute top-0 right-0 w-full h-full z-40 bg-white menu`}
+            } absolute top-0 right-0 w-full h-full z-40 bg-white dark:bg-gray-500 dark:text-white menu`}
           >
             <div className="flex flex-col items-center gap-12 mt-32">
               <Link href="/" className="font-extrabold text-sm" onClick={closeMenu}>
@@ -68,7 +68,7 @@ const Navbar = () => {
           width={175}
           height={175}
           alt="logo"
-          className="mix-blend-multiply dark:shadow-xl  dark:bg-white"
+          className="mix-blend-screen p-1 rounded dark:shadow-xl  dark:bg-white"
         />
         {/* Navigation Links */}
         <div className="flex items-center gap-16">

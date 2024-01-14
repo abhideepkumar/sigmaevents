@@ -19,7 +19,7 @@ export default function Home() {
               alt="Welcome Image"
               width={500}
               height={500}
-              className="rounded-lg dark:border-green-300 dark:border-[1px]"
+              className="rounded-lg"
               priority={true}
             />
           </div>
@@ -37,7 +37,7 @@ export default function Home() {
               </p>
             ) : (
               // If not logged in, prompt to login
-              <p className="text-gray-800  dark:text-red-900">Login to create or view your profile.</p>
+              <p className="text-red-600">Login to create or view your profile.</p>
             )}
           </div>
         </div>

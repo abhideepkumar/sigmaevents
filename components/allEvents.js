@@ -61,7 +61,7 @@ const AllEvents = () => {
 
   return (
     <main className="container p-4 mx-auto">
-      <h1 className="text-3xl font-bold mb-6">Events</h1>
+      <h1 className="text-3xl font-bold mb-6 dark:text-gray-300">Events</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
       {loading ? Array(3).fill(0).map((event, id) => (
           <div key={id} className="bg-white rounded-lg p-4 hover:bg-emerald-50 transition shadow-lg hover:shadow-2xl flex flex-col justify-between animate-pulse">
@@ -81,7 +81,7 @@ const AllEvents = () => {
           events.map((event) => (
             <div
               key={event._id}
-              className="bg-white rounded-lg p-4 hover:bg-emerald-50 transition shadow-lg hover:shadow-2xl flex flex-col justify-between"
+              className="bg-white dark:bg-slate-600 rounded-lg p-4 hover:bg-emerald-50 transition shadow-lg hover:shadow-2xl flex flex-col justify-between"
             >
               <div className="">
                 {/* Display event image */}
@@ -97,7 +97,7 @@ const AllEvents = () => {
                 />
               </div>
               {/* Display event details */}
-              <div>
+              <div className="dark:text-white">
                 <h2 className="mt-1 text-xl font-semibold">
                   {event.title || "Not Mentioned"}
                 </h2>

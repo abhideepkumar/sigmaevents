@@ -14,7 +14,7 @@ const User = () => {
 
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center dark:bg-slate-800">
-      <div className="bg-white p-8 rounded-lg shadow-md max-w-md w-full">
+      <div className="bg-white dark:bg-gray-600 p-8 rounded-lg shadow-md max-w-md w-full">
         <h2 className="text-2xl font-semibold mb-4 dark:text-white">Welcome, {name}</h2>
         {/* Display user information */}
         <div className="mb-4">
