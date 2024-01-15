@@ -17,7 +17,7 @@ const Navbar = () => {
 
   return (
     <>
-      <div className="lg:hidden flex justify-between items-center p-6 theme dark:bg-slate-800">
+      <div className="lg:hidden flex justify-between items-center p-6 theme bg-amber-400 dark:bg-slate-800">
         <Image
           href="/"
           src="/logo.svg"
@@ -68,7 +68,7 @@ const Navbar = () => {
           width={175}
           height={175}
           alt="logo"
-          className="mix-blend-screen p-1 rounded dark:shadow-xl  dark:bg-white"
+          className="p-1 rounded dark:shadow-xl  dark:bg-white"
         />
         {/* Navigation Links */}
         <div className="flex items-center gap-16">
