@@ -3,6 +3,7 @@ import { useSession } from "next-auth/react";
 import Cookies from "js-cookie";
 import Image from "next/image";
 import Feedback from "./feedback";
+import { Calendar, Clock, Hourglass, Info } from "lucide-react";
 
 const AllEvents = () => {
   const [events, setEvents] = useState([]);
@@ -63,122 +64,154 @@ const AllEvents = () => {
     <main className="container p-4 mx-auto">
       <h1 className="text-3xl font-bold mb-6 dark:text-gray-300">Events</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-      {loading ? Array(3).fill(0).map((event, id) => (
-          <div key={id} className="bg-white rounded-lg p-4 hover:bg-emerald-50 transition shadow-lg hover:shadow-2xl flex flex-col justify-between animate-pulse">
-            <div className="h-52 w-auto bg-gray-400 rounded-lg"></div>
-            <div className="px-6 py-4">
-              <div className="h-6 bg-gray-300 mb-2"></div>
-              <div className="h-4 bg-gray-300 w-2/3"></div>
-            </div>
-            <div className="px-6 pt-4 pb-2">
-              <div className="h-4 bg-gray-300 w-1/4 mb-2"></div>
-              <div className="h-4 bg-gray-300 w-1/2 mb-2"></div>
-              <div className="h-4 bg-gray-300 w-1/4 mb-2"></div>
-              <div className="h-4 bg-gray-300 w-1/2"></div>
-            </div>
-          </div>
-        )) : (
-          events.map((event) => (
-            <div
-              key={event._id}
-              className="bg-white dark:bg-slate-600 rounded-lg p-4 hover:bg-emerald-50 transition shadow-lg hover:shadow-2xl flex flex-col justify-between"
-            >
-              <div className="">
-                {/* Display event image */}
-                <Image
-                  src={`https://source.unsplash.com/480x360/?code?${event._id}`}
-                  loader={() =>
-                    `https://source.unsplash.com/480x360/?code?${event._id}`
-                  }
-                  alt="Event Image"
-                  width={480}
-                  height={360}
-                  className="rounded-lg aspect-video"
-                />
-              </div>
-              {/* Display event details */}
-              <div className="dark:text-white">
-                <h2 className="mt-1 text-xl font-semibold">
-                  {event.title || "Not Mentioned"}
-                </h2>
-                <p className="mt-1">{event.desc || "Not Mentioned"}</p>
-                <p className="mt-1 text-gray-600">
-                  on {event.date || "Not Mentioned"}
-                </p>
-                <p className="mt-1">
-                  <strong>Location:</strong>{" "}
-                  {event.location?.type || "Not Mentioned"}
-                </p>
-                <p className="mt-1">
-                  <strong>Deadline:</strong> {event.deadline || "Not Mentioned"}
-                </p>
-                <p className="mt-1">
-                  <strong>Date:</strong> {event.date || "Not Mentioned"}
-                </p>
-                <p className="mt-1">
-                  <strong>Time:</strong> {event.time || "Not Mentioned"}
-                </p>
-              </div>
-              {/* Register button */}
-              <div className="mt-4 flex justify-center">
-                {session && (
-                  <button
-                    className={`px-6 py-2 rounded-3xl hover:shadow-2xl ${
-                      checkRegister(event.registered)
-                        ? "bg-green-700 text-white hover:bg-green-800"
-                        : "bg-black text-white shadow-md hover:shadow-2xl"
-                    }`}
-                    onClick={() => {
-                      if (
-                        confirm(
-                          'Do you want to confirm Registration for the event "' +
-                            event.title +
-                            `"`
-                        )
-                      ) {
-                        handleRegister(event);
-                      } else {
-                        console.log("Registration cancelled");
-                      }
-                    }}
-                    disabled={checkRegister(event.registered)}
-                  >
-                    {checkRegister(event.registered)
-                      ? "Registered"
-                      : "Register"}
-                  </button>
-                )}
-                {/* Feedback button */}
-                {session && event.feedback && (
-                  <button
-                    className="ml-4 px-6 py-2 rounded-3xl hover:shadow-2xl bg-blue-500 text-white"
-                    onClick={() => {
-                      setSelectedEvent(event);
-                      setShowFeedbackForm(true);
-                    }}
-                  >
-                    Feedback
-                  </button>
-                )}
-              </div>
-              {/* Display message for users to login and fill data in settings */}
-              {!Allset && !session && (
-                <div className="text-red-600">
-                  Login and fill data in settings to Register
+        {loading
+          ? Array(3)
+              .fill(0)
+              .map((event, id) => (
+                <div
+                  key={id}
+                  className="bg-white rounded-lg p-4 hover:bg-emerald-50 transition shadow-lg hover:shadow-2xl flex flex-col justify-between animate-pulse"
+                >
+                  <div className="h-52 w-auto bg-gray-400 rounded-lg"></div>
+                  <div className="px-6 py-4">
+                    <div className="h-6 bg-gray-300 mb-2"></div>
+                    <div className="h-4 bg-gray-300 w-2/3"></div>
+                  </div>
+                  <div className="px-6 pt-4 pb-2">
+                    <div className="h-4 bg-gray-300 w-1/4 mb-2"></div>
+                    <div className="h-4 bg-gray-300 w-1/2 mb-2"></div>
+                    <div className="h-4 bg-gray-300 w-1/4 mb-2"></div>
+                    <div className="h-4 bg-gray-300 w-1/2"></div>
+                  </div>
                 </div>
-              )}
+              ))
+          : events.map((event) => (
+              <div
+                key={event._id}
+                className="bg-white dark:bg-slate-600 rounded-lg p-4 hover:bg-emerald-50 transition shadow-lg hover:shadow-2xl flex flex-col justify-between"
+              >
+                <div className="">
+                  {/* Display event image */}
+                  <Image
+                    src={`https://source.unsplash.com/480x360/?code?${event._id}`}
+                    loader={() =>
+                      `https://source.unsplash.com/480x360/?code?${event._id}`
+                    }
+                    alt="Event Image"
+                    width={480}
+                    height={360}
+                    className="rounded-lg aspect-video"
+                  />
+                </div>
+                {/* Display event details */}
+                <div className="dark:text-white tracking-tight text-xl font-semibold drop-shadow ">
+                  <h2 className="mt-1 text-xl font-semibold dark:text-yellow-300 
+                  text-blue-600 hover:translate-y-1/2 hover:translate-x-1/4 hover:scale-150 duration-500">
+                    {event.title || "Not Mentioned"}
+                  </h2>
 
-              {/* Feedback Form */}
-              {showFeedbackForm && (
-                <Feedback
-                  event={selectedEvent}
-                  userId={userId}
-                  setShowFeedbackForm={setShowFeedbackForm}
-                />
-              )}
-            </div>
-          ))
-        )}{" "}
+                  <div className="flex items-center p-5">
+                    {event.location?.type === "Online" ? (
+                      <div className="text-green-600
+                      dark:text-green-400 font-bold text-xl">
+                        {event.location?.type}
+                      </div>
+                    ) : (
+                      <div className="text-red-600 font-bold text-xl">
+                        {" "}
+                        {event.location?.type}
+                      </div>
+                    )}
+                  </div>
+
+                  <div className="flex mt-2 text-base font-normal leading-tight space-x-0.5 italic font-sans">
+                    <p className="mx-2 font-bold text-blue-400">
+                      <Info size={16} />
+                    </p>
+                    {event.description || "Not Mentioned"}
+                  </div>
+
+                  <div className="flex items-center mt-2 text-lg">
+                    <p className="mx-2 font-bold text-blue-400">
+                      <Calendar />
+                    </p>
+                    {event.date || "Not Mentioned"}
+                  </div>
+
+                  <div className="flex items-center mt-2 text-lg">
+                    <p className="mx-2 font-bold text-blue-400">
+                      <Clock />
+                    </p>
+                    {event.time || "Not Mentioned"}
+                  </div>
+                </div>
+
+                <div className="flex items-center mt-2 text-lg dark:text-white font-bold">
+                  <p className="mx-2 font-bold text-red-600">
+                    <Hourglass/>
+                  </p>
+                  {event.deadline || "Not Mentioned"} !!
+                </div>
+
+                {/* Register button */}
+                <div className="mt-4 flex justify-center">
+                  {session && (
+                    <button
+                      className={`px-6 py-2 rounded-3xl hover:shadow-2xl ${
+                        checkRegister(event.registered)
+                          ? "bg-green-700 text-white hover:bg-green-800"
+                          : "bg-black text-white shadow-md hover:shadow-2xl"
+                      }`}
+                      onClick={() => {
+                        if (
+                          confirm(
+                            'Do you want to confirm Registration for the event "' +
+                              event.title +
+                              `"`
+                          )
+                        ) {
+                          handleRegister(event);
+                        } else {
+                          console.log("Registration cancelled");
+                        }
+                      }}
+                      disabled={checkRegister(event.registered)}
+                    >
+                      {checkRegister(event.registered)
+                        ? "Registered"
+                        : "Register"}
+                    </button>
+                  )}
+                  {/* Feedback button */}
+                  {session && event.feedback && (
+                    <button
+                      className="ml-4 px-6 py-2 rounded-3xl hover:shadow-2xl bg-blue-500 text-white"
+                      onClick={() => {
+                        setSelectedEvent(event);
+                        setShowFeedbackForm(true);
+                      }}
+                    >
+                      Feedback
+                    </button>
+                  )}
+                </div>
+                {/* Display message for users to login and fill data in settings */}
+                {!Allset && !session && (
+                  <div className="dark:text-red-50 text-red-600 font-bold animate-pulse text-base">
+                    Login and fill data in settings to Register
+                  </div>
+                )}
+
+                {/* Feedback Form */}
+                {showFeedbackForm && (
+                  <Feedback
+                    event={selectedEvent}
+                    userId={userId}
+                    setShowFeedbackForm={setShowFeedbackForm}
+                  />
+                )}
+              </div>
+            ))}{" "}
       </div>
     </main>
   );
