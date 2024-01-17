@@ -3,7 +3,7 @@ import { useSession } from "next-auth/react";
 import Cookies from "js-cookie";
 import Image from "next/image";
 import Feedback from "./feedback";
-import { Calendar, Clock, Hourglass, Info } from "lucide-react";
+import { Calendar, Clock, Hourglass, Info, MapPin } from "lucide-react";
 
 const AllEvents = () => {
   const [events, setEvents] = useState([]);
@@ -104,50 +104,53 @@ const AllEvents = () => {
                   />
                 </div>
                 {/* Display event details */}
-                <div className="dark:text-white tracking-tight text-xl font-semibold drop-shadow ">
-                  <h2 className="mt-1 text-xl font-semibold dark:text-yellow-300 
-                  text-blue-600 hover:translate-y-1/2 hover:translate-x-1/4 hover:scale-150 duration-500">
+                <div className="dark:text-white tracking-tight text-xl drop-shadow ">
+                  <h2 className="mt-3 text-2xl font-semibold dark:text-yellow-300 
+                 ">
                     {event.title || "Not Mentioned"}
                   </h2>
 
-                  <div className="flex items-center p-5">
+                  <div className="flex items-center mt-3">
+                    <p className="mx-2">
+                      <MapPin />
+                      </p>
                     {event.location?.type === "Online" ? (
                       <div className="text-green-600
-                      dark:text-green-400 font-bold text-xl">
+                      dark:text-green-400">
                         {event.location?.type}
                       </div>
                     ) : (
-                      <div className="text-red-600 font-bold text-xl">
+                      <div className="text-red-600 text-xl">
                         {" "}
                         {event.location?.type}
                       </div>
                     )}
                   </div>
 
-                  <div className="flex mt-2 text-base font-normal leading-tight space-x-0.5 italic font-sans">
-                    <p className="mx-2 font-bold text-blue-400">
-                      <Info size={16} />
+                  <div className="flex items-center mt-2 text-base font-sans">
+                    <p className="mx-2">
+                      <Info />
                     </p>
                     {event.description || "Not Mentioned"}
                   </div>
 
-                  <div className="flex items-center mt-2 text-lg">
-                    <p className="mx-2 font-bold text-blue-400">
+                  <div className="flex items-center mt-2 text-base">
+                    <p className="mx-2">
                       <Calendar />
                     </p>
                     {event.date || "Not Mentioned"}
                   </div>
 
-                  <div className="flex items-center mt-2 text-lg">
-                    <p className="mx-2 font-bold text-blue-400">
+                  <div className="flex items-center mt-2 text-base">
+                    <p className="mx-2">
                       <Clock />
                     </p>
                     {event.time || "Not Mentioned"}
                   </div>
                 </div>
 
-                <div className="flex items-center mt-2 text-lg dark:text-white font-bold">
-                  <p className="mx-2 font-bold text-red-600">
+                <div className="flex items-center mt-2 text-base dark:text-white">
+                  <p className="mx-2  ">
                     <Hourglass/>
                   </p>
                   {event.deadline || "Not Mentioned"} !!
