@@ -17,8 +17,8 @@ export default function Home() {
               src="https://source.unsplash.com/collection/8317102/480x360"
               loader={() => "https://source.unsplash.com/collection/8317102/480x360"}
               alt="Welcome Image"
-              width={500}
-              height={500}
+              width={515}
+              height={515}
               className="rounded-lg"
               priority={true}
             />
@@ -44,7 +44,7 @@ export default function Home() {
       </section>
       {/* Display footer */}
       <footer className="bg-emerald-300 py-4 dark:bg-slate-800">
-        <div className="container mx-auto px-6 text-center">
+        <div className="container mx-auto px-7 text-center">
           <p className="dark:text-emerald-300">&copy; {new Date().getFullYear()} Sigma Events. Some rights reserved.</p>
         </div>
       </footer>
