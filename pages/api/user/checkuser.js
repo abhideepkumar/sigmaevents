@@ -1,14 +1,10 @@
 import axios from "axios";
-import { getSession } from "next-auth/react";
 
 export default async function handler(req, res) {
-  // Get the session information using NextAuth
-  const session = await getSession({ req });
-  console.log("Session fetched from NextAuth: ", session);
+  const email = req.body.email;
+  console.log(email)
 
   try {
-    // Extract the email from the user session
-    const { email } = session.user;
 
     // Send a POST request to fetch user data from MongoDB
     const response = await axios.post(
@@ -29,6 +25,7 @@ export default async function handler(req, res) {
 
     // Get the user data from the response
     const data = response.data.document;
+    console.log("Response after sending:", data);
 
     // Send the user data as a JSON response
     res.status(200).json(data);

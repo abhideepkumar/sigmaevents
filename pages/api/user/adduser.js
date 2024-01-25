@@ -1,33 +1,17 @@
 import axios from "axios";
 
 export default async function handler(req, res) {
-  // Retrieve data from the request body
   const data = req.body;
   console.log("Data received:", data);
-
   try {
-    // Construct the URL for inserting data
-    const iUrl = `${process.env.MONGO_API}insertOne`;
-    console.log("URL:", iUrl);
-
     // Send a POST request to insert data into the MongoDB collection
     const response = await axios.post(
-      iUrl,
+      `${process.env.MONGO_API}insertOne`,
       {
-        collection: "students",
-        database: "profiles",
+        collection: data.collectionName,
+        database: data.database,
         dataSource: "Cluster1",
-        document: {
-          // Extract data from the request body
-          name: data.name,
-          USN: data.USN,
-          email: data.email,
-          phoneNo: data.phoneNo,
-          branch: data.branch,
-          college: data.college,
-          LastYear: data.passoutYear,
-          appliedEvents: [],
-        },
+        document:data.document,
       },
       {
         headers: {

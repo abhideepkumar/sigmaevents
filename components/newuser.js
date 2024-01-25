@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useSession } from "next-auth/react";
+import { useSession,signOut } from "next-auth/react";
 import Cookies from "js-cookie";
 
 const Newuser = () => {
@@ -14,6 +14,8 @@ const Newuser = () => {
     branch: "",
     college: "",
     passoutYear: "",
+    role:"student",
+    appliedEvents: [],
   });
 
   // Function to handle form submission
@@ -26,7 +28,13 @@ const Newuser = () => {
           "Content-Type": "application/json",
           "Access-Control-Request-Headers": "*",
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          document: {
+            ...formData,
+          }, 
+          collectionName: "students", 
+          database: "profiles",
+        }),
       });
       if (response.ok) {
         // If data is sent successfully, update cookies and redirect
@@ -147,6 +155,20 @@ const Newuser = () => {
               className="px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             >
               Save
+            </button>
+                 {/* Button to sign out user */}
+                 <button
+              onClick={() => {
+                // Sign out user and remove all cookies
+                signOut("google", { callbackUrl: process.env.NEXTAUTH_URL });
+                const cookies = Cookies.get();
+                for (const cookie in cookies) {
+                  Cookies.remove(cookie);
+                }
+              }}
+              className=" bg-red-500 text-white p-2 mx-5 rounded-md hover:shadow-xl hover:bg-red-600"
+            >
+              Cancel
             </button>
           </div>
         </form>
