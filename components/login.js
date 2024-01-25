@@ -18,7 +18,7 @@ const Login = () => {
 
   const fetchUserData = async () => {
     try {
-      const response = await fetch("/api/auth/checkuser");
+      const response = await fetch("/api/user/checkuser");
       if (!response.ok) {
         throw new Error("Failed to fetch user data");
       }

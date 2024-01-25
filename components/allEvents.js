@@ -19,7 +19,7 @@ const AllEvents = () => {
   }, []);
 
   const fetchEvents = () => {
-    fetch("/api/auth/fetchevents")
+    fetch("/api/user/fetchevents")
       .then((response) => response.json())
       .then((data) => {
         const eventsData = data.documents.reverse();
@@ -47,7 +47,7 @@ const AllEvents = () => {
   const handleRegister = async (event) => {
     try {
       const response = await fetch(
-        `/api/auth/register?eventId=${event._id}&userId=${userId}`
+        `/api/user/register?eventId=${event._id}&userId=${userId}`
       );
       if (response.ok) {
         window.location.reload();
@@ -131,7 +131,7 @@ const AllEvents = () => {
                     <p className="mx-2">
                       <Info />
                     </p>
-                    {event.description || "Not Mentioned"}
+                    {event.desc || "Not Mentioned"}
                   </div>
 
                   <div className="flex items-center mt-2 text-base">

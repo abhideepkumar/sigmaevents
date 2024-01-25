@@ -20,7 +20,7 @@ const Newuser = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("/api/auth/adduser", {
+      const response = await fetch("/api/user/adduser", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
