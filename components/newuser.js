@@ -144,8 +144,8 @@ const Newuser = () => {
           </div>
           {/* Additional note for the user */}
           <p className="text-red-600">
-            After saving, You need to contact us on email{" "}
-            <span className="text-blue-600 dark:text-red-300">returncode1@gmail.com</span> to make changes
+            To apply for any changes in your details after you submit, You need to contact us on email{" "}
+            <span className="text-blue-600 dark:text-red-300">returncode1@gmail.com</span>
           </p>
 
           {/* Submit button */}

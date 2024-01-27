@@ -13,7 +13,7 @@ const User = () => {
   const passoutYear = Cookies.get("LastYear") || "Can't Fetch";
 
   return (
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center dark:bg-slate-800">
+    <div className="max-h-screen bg-gray-100 flex items-center justify-center dark:bg-slate-800">
       <div className="bg-white dark:bg-gray-600 p-8 rounded-lg shadow-md max-w-md w-full">
         <h2 className="text-2xl font-semibold mb-4 dark:text-white">Welcome, {name}</h2>
         {/* Display user information */}

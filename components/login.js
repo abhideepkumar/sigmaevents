@@ -26,6 +26,8 @@ const Login = () => {
         },
         body: JSON.stringify({
           email: session.user.email,
+          collection:"students",
+          database:"profiles"
         })
       });
       if (!response.ok) {
