@@ -21,6 +21,7 @@ export default async function handler(req, res) {
 
     // Send the retrieved events as a JSON response
     res.status(200).json(response.data);
+    console.log("events fetched are: ", response.data);
   } catch (error) {
     // Handle errors if the request fails
     console.error("Error retrieving all events:", error);

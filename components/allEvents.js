@@ -3,7 +3,8 @@ import { useSession } from "next-auth/react";
 import Cookies from "js-cookie";
 import Image from "next/image";
 import Feedback from "./feedback";
-import { Calendar, Clock, Hourglass, Info, MapPin } from "lucide-react";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCircleInfo,faMapLocationDot,faCalendarPlus,faClock,faHourglassHalf,faLink } from '@fortawesome/free-solid-svg-icons'
 
 const AllEvents = () => {
   const [events, setEvents] = useState([]);
@@ -88,15 +89,13 @@ const AllEvents = () => {
           : events.map((event) => (
               <div
                 key={event._id}
-                className="bg-white dark:bg-slate-600 rounded-lg p-4 hover:bg-emerald-50 transition shadow-lg hover:shadow-2xl flex flex-col justify-between"
+                className="bg-white dark:bg-slate-600 rounded-lg p-4 hover:bg-green-50 transition shadow-lg hover:shadow-2xl flex flex-col justify-between"
               >
-                <div className="">
+                <div className="flex justify-center items-center">
                   {/* Display event image */}
                   <Image
                     src={`https://source.unsplash.com/480x360/?code?${event._id}`}
-                    loader={() =>
-                      `https://source.unsplash.com/480x360/?code?${event._id}`
-                    }
+                  
                     alt="Event Image"
                     width={480}
                     height={360}
@@ -105,55 +104,53 @@ const AllEvents = () => {
                 </div>
                 {/* Display event details */}
                 <div className="dark:text-white tracking-tight text-xl drop-shadow ">
-                  <h2 className="mt-3 text-2xl font-semibold dark:text-yellow-300 
-                 ">
+                  <h2 className="mt-3 text-2xl font-semibold dark:text-green-300">
                     {event.title || "Not Mentioned"}
                   </h2>
 
                   <div className="flex items-center mt-3">
                     <p className="mx-2">
-                      <MapPin />
+                    <FontAwesomeIcon icon={faMapLocationDot} />
                       </p>
                     {event.location?.type === "Online" ? (
-                      <div className="text-green-600
-                      dark:text-green-400">
-                        {event.location?.type}
-                      </div>
+                      <a href={event.location.link} className="">
+                        {event.location?.type}<FontAwesomeIcon icon={faLink} />
+                      </a>
                     ) : (
-                      <div className="text-red-600 text-xl">
+                      <div className="text-xl">
                         {" "}
-                        {event.location?.type}
+                        {event.location?.link || "Not Mentioned"}
                       </div>
                     )}
                   </div>
 
-                  <div className="flex items-center mt-2 text-base font-sans">
+                  <div className="flex items-center mt-2 bg-gray-200 dark:bg-gray-800 rounded-lg p-2 text-base font-sans">
                     <p className="mx-2">
-                      <Info />
+                    <FontAwesomeIcon icon={faCircleInfo} />
                     </p>
                     {event.desc || "Not Mentioned"}
                   </div>
-
-                  <div className="flex items-center mt-2 text-base">
+                <div className="flex justify-between mt-2 bg-gray-200 dark:bg-gray-800 rounded-lg p-2">
+                  <div className="flex items-center text-base">
                     <p className="mx-2">
-                      <Calendar />
+                    <FontAwesomeIcon icon={faCalendarPlus} />
                     </p>
                     {event.date || "Not Mentioned"}
                   </div>
 
-                  <div className="flex items-center mt-2 text-base">
+                  <div className="flex items-center  text-base">
                     <p className="mx-2">
-                      <Clock />
+                    <FontAwesomeIcon icon={faClock} />
                     </p>
                     {event.time || "Not Mentioned"}
                   </div>
                 </div>
-
-                <div className="flex items-center mt-2 text-base dark:text-white">
+              </div>
+                <div className="flex items-center mt-2 bg-gray-200 dark:bg-gray-800 rounded-lg p-2 text-base dark:text-white">
                   <p className="mx-2  ">
-                    <Hourglass/>
+                  <FontAwesomeIcon icon={faHourglassHalf} />
                   </p>
-                  {event.deadline || "Not Mentioned"} !!
+                  {event.deadline || "Not Mentioned"}
                 </div>
 
                 {/* Register button */}
@@ -200,7 +197,7 @@ const AllEvents = () => {
                 </div>
                 {/* Display message for users to login and fill data in settings */}
                 {!Allset && !session && (
-                  <div className="dark:text-red-50 text-red-600 font-bold animate-pulse text-base">
+                  <div className="dark:text-red-500 text-red-600 font-bold animate-pulse text-base">
                     Login and fill data in settings to Register
                   </div>
                 )}

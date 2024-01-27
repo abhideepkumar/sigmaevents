@@ -43,9 +43,9 @@ export default function Home() {
         </div>
       </section>
       {/* Display footer */}
-      <footer className="bg-emerald-300 py-4 dark:bg-slate-800">
+      <footer className="bg-green-300 py-4 dark:bg-slate-800">
         <div className="container mx-auto px-6 text-center">
-          <p className="dark:text-emerald-300">&copy; {new Date().getFullYear()} Sigma Events. Some rights reserved.</p>
+          <p className="dark:text-green-300">&copy; {new Date().getFullYear()} Sigma Events. Some rights reserved.</p>
         </div>
       </footer>
     </main>

@@ -50,7 +50,7 @@ const Login = () => {
     <div className="flex items-center">
       {session ? (
         // Display settings link if the user is logged in
-        <Link href="/setting">
+        <Link href="/setting" className="dark:bg-gray-500 rounded-sm md:p-1">
           <Image
             src="/profile.svg"
             width={0}

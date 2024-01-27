@@ -18,14 +18,7 @@ const Navbar = () => {
   return (
     <>
       <div className="lg:hidden flex justify-between items-center p-6 theme bg-amber-400 dark:bg-slate-800">
-        <Image
-          href="/"
-          src="/logo.svg"
-          width={125}
-          height={125}
-          alt="logo"
-          className="mix-blend-screen p-1 rounded dark:shadow-xl  dark:bg-white"
-        />
+      <Link href="/" className="md:text-3xl font-bold  text-center dark:text-white">Sigma<span className="text-green-300 font-mono md:text-4xl">Events</span> </Link>
         <div className="flex gap-6 items-center">
           <Login />
           <Image
@@ -33,7 +26,7 @@ const Navbar = () => {
             width={0}
             height={0}
             alt="menu"
-            className="mix-blend-multiply w-6 z-50 menu-icon"
+            className="w-6 z-50 dark:bg-gray-500 rounded-sm"
             onClick={toggleMenu}
           />
           <div
@@ -62,14 +55,7 @@ const Navbar = () => {
         <Darkmode/>
       <div className="hidden lg:flex p-8 px-12 items-center justify-between theme dark:bg-slate-800">
         {/* Logo */}
-        <Image
-          href="/"
-          src="/logo.svg"
-          width={175}
-          height={175}
-          alt="logo"
-          className="p-1 rounded dark:shadow-xl  dark:bg-white"
-        />
+        <Link href="/" className="text-3xl font-bold  text-center dark:text-white">Sigma<span className="text-green-300 font-mono text-4xl">Events</span> </Link>
         {/* Navigation Links */}
         <div className="flex items-center gap-16">
           <Link
