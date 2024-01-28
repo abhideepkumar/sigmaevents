@@ -42,19 +42,11 @@ const Login = () => {
       const data = await response.json();
       console.log("Response after sending:", data);
 
-      if (data === null) {
-        router.push("/admin/new_organizers");
-      } else {
-        if (data.role == "student") {
-          router.push("/");
-        } else if (data.role == "organizer") {
-          // Set cookies for user data
-          Object.keys(data).forEach((key) => {
-            Cookies.set("admin" + key, data[key], { expires: 30 });
-            router.push("/admin");
-          });
-        }
-      }
+      data === null ? router.push("/admin/new_organizers") : data.role == "student" ? router.push("/") : Object.keys(data).forEach((key) => {
+        Cookies.set("admin" + key, data[key], { expires: 30 });
+        router.push("/admin");
+      });
+      
     } catch (error) {
       console.error("Error while fetching admin data from Login:", error);
     }

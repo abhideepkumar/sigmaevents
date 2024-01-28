@@ -24,6 +24,8 @@ const NewOrganizer = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      const base64Logo = await convertToBase64(formData.clubLogo);
+      const base64bg = await convertToBase64(formData.clubBackground);
       const response = await fetch("/api/user/adduser", {
         method: "POST",
         headers: {
@@ -31,8 +33,8 @@ const NewOrganizer = () => {
           "Access-Control-Request-Headers": "*",
         },
         body: JSON.stringify({
-          document: { ...formData },
-          collectionName: "organizers",
+          document: { ...formData, clubLogo: base64Logo, clubBackground: base64bg },
+          collection: "organizers",
           database: "profiles",
         }),
       });
@@ -41,6 +43,7 @@ const NewOrganizer = () => {
           Cookies.set("admin" + key, formData[key], 30);
         });
       } else {
+      if(response.status===413)alert("Image size is exceeded, try changing the image size");
         throw new Error("Error in response: " + response.data);
       }
     } catch (err) {
@@ -56,6 +59,26 @@ const NewOrganizer = () => {
       ...prevFormData,
       [name]: value,
     }));
+  };
+
+  const handleFileChange = (e) => {
+    const { name, files } = e.target;
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: files[0],
+    }));
+  };
+
+  const convertToBase64 = (file) => {
+    return new Promise((resolve, reject) => {
+      if (!file) {
+        resolve(null);
+      }
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result.split(",")[1]);
+      reader.onerror = (error) => reject(error);
+    });
   };
 
   const handleArrayChange = (e) => {
@@ -101,13 +124,12 @@ const NewOrganizer = () => {
           </div>
           <div>
             <label htmlFor="clubLogo" className="block text-gray-700 font-medium dark:text-white">
-              Club Logo:
+              Club Logo(under 1 MB):
             </label>
             <input
               type="file"
               name="clubLogo"
-              value={formData.clubLogo}
-              onChange={handleChange}
+              onChange={handleFileChange}
               required
               accept="image/*"
               className="mt-1 p-2 block w-full border border-gray-200 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm dark:font-bold"
@@ -118,13 +140,12 @@ const NewOrganizer = () => {
               htmlFor="clubBackground"
               className="block text-gray-700 font-medium dark:text-white"
             >
-              Club Background Image (Landscape):
+              Club Background Image (under 1 MB):
             </label>
             <input
               type="file"
               name="clubBackground"
-              value={formData.clubBackground}
-              onChange={handleChange}
+              onChange={handleFileChange}
               required
               accept="image/*"
               className="mt-1 p-2 block w-full border border-gray-200 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm dark:font-bold"

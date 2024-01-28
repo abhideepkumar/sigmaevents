@@ -32,7 +32,7 @@ const Newuser = () => {
           document: {
             ...formData,
           }, 
-          collectionName: "students", 
+          collection: "students", 
           database: "profiles",
         }),
       });

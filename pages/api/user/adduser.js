@@ -8,7 +8,7 @@ export default async function handler(req, res) {
     const response = await axios.post(
       `${process.env.MONGO_API}insertOne`,
       {
-        collection: data.collectionName,
+        collection: data.collection,
         database: data.database,
         dataSource: "Cluster1",
         document:data.document,
