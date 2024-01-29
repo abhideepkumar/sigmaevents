@@ -47,6 +47,12 @@ Rename a `example.env.local` file to `.env.local` in the project's root director
 3. **Obtain Google Client ID and Client Secret**:
    - Within the Google Cloud Console, retrieve the Client ID and Client Secret for the project.
 
+4. **Add Authorized JavaScript origins and Authorized redirect URIs**:
+   - In the Google Cloud Console, go to the Credentials section and select your project.
+   - Click on the edit button next to your Client ID and scroll down to the Authorized JavaScript origins and Authorized redirect URIs sections.
+   - Add the URL where your application will run locally (`http://localhost:3000/` for Authorized JavaScript origins) and (`http://localhost:3000/api/auth/callback/google` for Authorized redirect URIs). This will allow Google to recognize your application and redirect the user back to your website after authentication.
+   - Save the changes and copy the Client ID and Client Secret to your `.env.local` file.
+
 #### Setting Up MongoDB
 
 1. **Create a MongoDB Atlas Account**:
@@ -60,6 +66,8 @@ Rename a `example.env.local` file to `.env.local` in the project's root director
 - `NEXTAUTH_SECRET`: This should be a 32-digit random hexadecimal code, used for session encryption and signing. Generate a secure secret key from [numbergenerator.org](https://numbergenerator.org/random-32-digit-hex-codes-generator) and paste it as the value for `NEXTAUTH_SECRET`.
 
 - `NEXTAUTH_URL`: Set this to the URL where your application will run locally (`http://localhost:3000/` by default). This URL is used during the authentication process. Also, add this url in your Google Console Authentication so that Google login will allow this URL.
+
+- `ADMIN_NEXTAUTH_URL`:This URL is used during the authentication process for admins.
 
 #### Update .env.local with obtained credentials
 
