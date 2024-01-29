@@ -13,23 +13,6 @@ This project simplifies event planning and participation with an intuitive and u
 - Privacy-focused approach without sharing personal information publicly.
 - Easy access to past and upcoming events for efficient planning.
 
-## 📁 Project Structure Overview
-
-The project structure includes various folders and pages:
-
-### Components
-
-- **Access**: Allows users to log in and access the website securely.
-- **AllEvents**: Displays all available events for browsing and registration.
-- **Login**: Handles the Google login authentication process.
-- **Navbar**: Navigation menu for easy site navigation.
-- **User** and **Newuser**: Display user details and assist in completing profiles.
-
-### Pages
-
-- **_app.js** and **_document.js**: Basic setup for the website layout.
-- **events.js** and **setting.js**: Pages displaying events and managing user settings.
-
 ## 🛠️ Setting Up Sigma Events Locally
 
 To set up Sigma Events locally on your machine, follow these steps:
@@ -70,7 +53,7 @@ Rename a `example.env.local` file to `.env.local` in the project's root director
    - Sign up at [MongoDB Atlas](https://www.mongodb.com/cloud/atlas) and create a new cluster for Sigma Events.
 
 2. **Get API Key and Connection URL**:
-   - After creating the cluster, obtain the API Key and Connection URL.
+   - After creating the cluster, obtain the API Key and Connection URL from Data API section.
 
 #### NextAuth Configuration
 
