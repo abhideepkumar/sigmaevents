@@ -22,7 +22,7 @@ const Newuser = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("/api/user/adduser", {
+      const response = await fetch("/api/db/insertOne", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -26,7 +26,7 @@ const NewOrganizer = () => {
     try {
       const base64Logo = await convertToBase64(formData.clubLogo);
       const base64bg = await convertToBase64(formData.clubBackground);
-      const response = await fetch("/api/user/adduser", {
+      const response = await fetch("/api/db/insertOne", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

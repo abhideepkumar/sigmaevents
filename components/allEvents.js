@@ -10,20 +10,31 @@ const AllEvents = () => {
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
   const { data: session } = useSession();
-  const userId = Cookies.get("_id");
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [showFeedbackForm, setShowFeedbackForm] = useState(false);
-  let Allset = userId !== undefined;
+  const userId = Cookies.get("_id");
+  let userCookie = userId !== undefined;
 
   useEffect(() => {
     fetchEvents();
   }, []);
 
   const fetchEvents = () => {
-    fetch("/api/user/fetchevents")
+    fetch("/api/db/find", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Request-Headers": "*",
+      },
+      body: JSON.stringify({
+        filter: {},
+        collection:"posted_events",
+        database:"events"
+      })
+    })
       .then((response) => response.json())
       .then((data) => {
-        const eventsData = data.documents.reverse();
+        const eventsData = data.data.reverse();
         setEvents(eventsData);
         setLoading(false);
       })
@@ -47,9 +58,21 @@ const AllEvents = () => {
 
   const handleRegister = async (event) => {
     try {
-      const response = await fetch(
-        `/api/user/register?eventId=${event._id}&userId=${userId}`
-      );
+        const response = await fetch(`/api/db/updateOne`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Request-Headers": "*",
+        },
+        body: JSON.stringify({
+          collection: "posted_events",
+          database: "events",
+          eventId: event._id,
+          userId: userId,
+          dbRef: "profiles",
+          collectionRef: "students",
+        }),
+      });
       if (response.ok) {
         window.location.reload();
       } else {
@@ -196,7 +219,7 @@ const AllEvents = () => {
                   )}
                 </div>
                 {/* Display message for users to login and fill data in settings */}
-                {!Allset && !session && (
+                {!userCookie && !session && (
                   <div className="dark:text-red-500 text-red-600 font-bold animate-pulse text-base">
                     Login and fill data in settings to Register
                   </div>

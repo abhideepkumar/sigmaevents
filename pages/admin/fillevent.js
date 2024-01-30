@@ -14,18 +14,6 @@ const Add = () => {
     time: "",
     registered: [],
   });
-
-  useEffect(() => {
-    const fetchSession = async () => {
-      const session = await getSession();
-      setEventData((prevEventData) => ({
-        ...prevEventData,
-        admin: session.user.email,
-      }));
-    };
-    fetchSession();
-  }, []);
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setEventData((prevEventData) => ({
@@ -37,14 +25,17 @@ const Add = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      console.log("Submit triggered", eventData);
-      const response = await fetch("/api/admin/addevent", {
+      const response = await fetch("/api/db/insertOne", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           "Access-Control-Request-Headers": "*",
         },
-        body: JSON.stringify(eventData),
+        body: JSON.stringify({
+          document: {...eventData},
+          collection: "posted_events",
+          database: "events",
+        }),
       });
       if (response.ok) {
         console.log("Data sent successfully!");

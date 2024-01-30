@@ -1,19 +1,15 @@
 import axios from "axios";
 
 export default async function handler(req, res) {
-  const email = req.body.email;
-  const database = req.body.database;
-  const collection = req.body.collection;
-
   try {
     // Send a POST request to fetch user data from MongoDB
     const response = await axios.post(
       `${process.env.MONGO_API}findOne`,
       {
-        collection: collection,
-        database: database,
+        collection: req.body.collection,
+        database: req.body.database,
         dataSource: "Cluster1",
-        filter: { email },
+        filter: req.body.fliter,
       },
       {
         headers: {

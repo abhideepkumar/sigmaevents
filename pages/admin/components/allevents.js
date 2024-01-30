@@ -2,16 +2,28 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
+import { useSession } from "next-auth/react";
 const AllEvents = () => {
   const [EventAll, setEventAll] = useState([]);
   const [loading, setLoading] = useState(true);
+  const { data: session } = useSession();
 
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await fetch("/api/admin/fetchevents");
+        const response = await fetch("/api/db/find", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Request-Headers": "*",
+          },
+          body: JSON.stringify({
+            filter: {admin: session.user.email},
+            collection:"posted_events",
+            database:"events"
+          })
+        });
         const data = await response.json();
-        console.log("data: ", data);
         const reversed_data = data.data.reverse();
         setEventAll(reversed_data);
         setLoading(false);

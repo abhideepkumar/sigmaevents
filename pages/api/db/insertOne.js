@@ -1,17 +1,16 @@
 import axios from "axios";
 
 export default async function handler(req, res) {
-  const data = req.body;
-  console.log("Data received:", data);
+  console.log("Data received:", req.body);
   try {
     // Send a POST request to insert data into the MongoDB collection
     const response = await axios.post(
       `${process.env.MONGO_API}insertOne`,
       {
-        collection: data.collection,
-        database: data.database,
+        collection: req.body.collection,
+        database: req.body.database,
         dataSource: "Cluster1",
-        document:data.document,
+        document:req.body.document,
       },
       {
         headers: {

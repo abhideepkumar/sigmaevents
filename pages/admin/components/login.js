@@ -24,14 +24,14 @@ const Login = () => {
 
   const fetchUserData = async () => {
     try {
-      const response = await fetch("/api/user/checkuser", {
+      const response = await fetch("/api/db/findOne", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           "Access-Control-Request-Headers": "*",
         },
         body: JSON.stringify({
-          email: session.user.email,
+          fliter: {email: session.user.email},
           collection: "organizers",
           database: "profiles",
         }),
