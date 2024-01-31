@@ -5,7 +5,7 @@ export default async function handler(req, res) {
   try {
     // Send a POST request to insert data into the MongoDB collection
     const response = await axios.post(
-      `${process.env.MONGO_API}insertOne`,
+      `${process.env.MONGODB_URL_ENDPOINT}insertOne`,
       {
         collection: req.body.collection,
         database: req.body.database,
@@ -14,7 +14,7 @@ export default async function handler(req, res) {
       },
       {
         headers: {
-          apiKey: process.env.MONGO_KEY,
+          apiKey: process.env.MONGODB_API_KEY,
           "Content-Type": "application/json",
           "Access-Control-Request-Headers": "*",
         },

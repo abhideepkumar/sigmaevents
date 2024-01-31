@@ -4,7 +4,7 @@ export default async function handler(req, res) {
 console.log(req.body)
   try {
     const response = await axios.post(
-      `${process.env.MONGO_API}updateOne`,
+      `${process.env.MONGODB_URL_ENDPOINT}updateOne`,
       {
         collection: req.body.collection,
         database: req.body.database,
@@ -20,7 +20,7 @@ console.log(req.body)
       },
       {
         headers: {
-          apiKey: process.env.MONGO_KEY,
+          apiKey: process.env.MONGODB_API_KEY,
           "Content-Type": "application/ejson",
           Accept: "application/json",
         },

@@ -40,8 +40,6 @@ const Login = () => {
         throw new Error("Failed to fetch user data");
       }
       const data = await response.json();
-      console.log("Response after sending:", data);
-
       data === null ? router.push("/admin/new_organizers") : data.role == "student" ? router.push("/") : Object.keys(data).forEach((key) => {
         Cookies.set("admin" + key, data[key], { expires: 30 });
         router.push("/admin");
