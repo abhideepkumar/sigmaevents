@@ -5,6 +5,7 @@ import Image from "next/image";
 import Feedback from "./feedback";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleInfo,faMapLocationDot,faCalendarPlus,faClock,faHourglassHalf,faLink } from '@fortawesome/free-solid-svg-icons'
+import toast from "react-hot-toast";
 
 const AllEvents = () => {
   const [events, setEvents] = useState([]);
@@ -75,6 +76,7 @@ const AllEvents = () => {
       });
       if (response.ok) {
         window.location.reload();
+        toast.success('Successfully registered!');
       } else {
         console.log("Registration failed for event:", event.name);
         console.log("Response from server failed", response.data);
@@ -118,7 +120,6 @@ const AllEvents = () => {
                   {/* Display event image */}
                   <Image
                     src={`https://source.unsplash.com/480x360/?code?${event._id}`}
-                  
                     alt="Event Image"
                     width={480}
                     height={360}
@@ -133,45 +134,43 @@ const AllEvents = () => {
 
                   <div className="flex items-center mt-3">
                     <p className="mx-2">
-                    <FontAwesomeIcon icon={faMapLocationDot} />
-                      </p>
+                      <FontAwesomeIcon icon={faMapLocationDot} />
+                    </p>
                     {event.location?.type === "Online" ? (
                       <a href={event.location.link} className="">
-                        {event.location?.type}<FontAwesomeIcon icon={faLink} />
+                        {event.location?.type}
+                        <FontAwesomeIcon icon={faLink} />
                       </a>
                     ) : (
-                      <div className="text-xl">
-                        {" "}
-                        {event.location?.link || "Not Mentioned"}
-                      </div>
+                      <div className="text-xl"> {event.location?.link || "Not Mentioned"}</div>
                     )}
                   </div>
 
                   <div className="flex items-center mt-2 bg-gray-200 dark:bg-gray-800 rounded-lg p-2 text-base font-sans">
                     <p className="mx-2">
-                    <FontAwesomeIcon icon={faCircleInfo} />
+                      <FontAwesomeIcon icon={faCircleInfo} />
                     </p>
                     {event.desc || "Not Mentioned"}
                   </div>
-                <div className="flex justify-between mt-2 bg-gray-200 dark:bg-gray-800 rounded-lg p-2">
-                  <div className="flex items-center text-base">
-                    <p className="mx-2">
-                    <FontAwesomeIcon icon={faCalendarPlus} />
-                    </p>
-                    {event.date || "Not Mentioned"}
-                  </div>
+                  <div className="flex justify-between mt-2 bg-gray-200 dark:bg-gray-800 rounded-lg p-2">
+                    <div className="flex items-center text-base">
+                      <p className="mx-2">
+                        <FontAwesomeIcon icon={faCalendarPlus} />
+                      </p>
+                      {event.date || "Not Mentioned"}
+                    </div>
 
-                  <div className="flex items-center  text-base">
-                    <p className="mx-2">
-                    <FontAwesomeIcon icon={faClock} />
-                    </p>
-                    {event.time || "Not Mentioned"}
+                    <div className="flex items-center  text-base">
+                      <p className="mx-2">
+                        <FontAwesomeIcon icon={faClock} />
+                      </p>
+                      {event.time || "Not Mentioned"}
+                    </div>
                   </div>
                 </div>
-              </div>
                 <div className="flex items-center mt-2 bg-gray-200 dark:bg-gray-800 rounded-lg p-2 text-base dark:text-white">
                   <p className="mx-2  ">
-                  <FontAwesomeIcon icon={faHourglassHalf} />
+                    <FontAwesomeIcon icon={faHourglassHalf} />
                   </p>
                   {event.deadline || "Not Mentioned"}
                 </div>
@@ -186,23 +185,15 @@ const AllEvents = () => {
                           : "bg-black text-white shadow-md hover:shadow-2xl"
                       }`}
                       onClick={() => {
-                        if (
-                          confirm(
-                            'Do you want to confirm Registration for the event "' +
-                              event.title +
-                              `"`
-                          )
-                        ) {
-                          handleRegister(event);
-                        } else {
-                          console.log("Registration cancelled");
-                        }
+                        confirm(
+                          'Do you want to confirm Registration for the event "' + event.title + `"`
+                        )
+                          ? handleRegister(event) 
+                          : console.log("Registration cancelled"); 
                       }}
                       disabled={checkRegister(event.registered)}
                     >
-                      {checkRegister(event.registered)
-                        ? "Registered"
-                        : "Register"}
+                      {checkRegister(event.registered) ? "Registered" : "Register"}
                     </button>
                   )}
                   {/* Feedback button */}
