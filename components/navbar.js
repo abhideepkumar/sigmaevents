@@ -17,7 +17,7 @@ const Navbar = () => {
 
   return (
     <>
-    <div class="navbar">
+    <div className="navbar">
       <div className="lg:hidden flex justify-between items-center p-6 theme bg-amber-400 dark:bg-slate-800">
       <Link href="/" className="md:text-3xl font-bold  text-center dark:text-white">Sigma<span className="text-green-300 font-mono md:text-4xl">Events</span> </Link>
         <div className="flex gap-6 items-center">
