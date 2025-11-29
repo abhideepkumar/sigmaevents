@@ -1,11 +1,10 @@
 import React, { useState } from "react";
-import { useSession,signOut } from "next-auth/react";
+import { useSession, signOut } from "next-auth/react";
 import Cookies from "js-cookie";
 
 const Newuser = () => {
   const { data: session } = useSession();
 
-  // State to manage form data
   const [formData, setFormData] = useState({
     name: "",
     USN: "",
@@ -14,165 +13,118 @@ const Newuser = () => {
     branch: "",
     college: "",
     passoutYear: "",
-    role:"student",
+    role: "student",
     appliedEvents: [],
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // Function to handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsSubmitting(true);
     try {
       const response = await fetch("/api/db/insertOne", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Access-Control-Request-Headers": "*",
         },
         body: JSON.stringify({
-          document: {
-            ...formData,
-          }, 
-          collection: "students", 
+          document: formData,
+          collection: "students",
           database: "profiles",
         }),
       });
+
       if (response.ok) {
-        // If data is sent successfully, update cookies and redirect
+        const data = await response.json();
+        const docId = data.data.insertedId;
         Object.keys(formData).forEach((key) => {
-          Cookies.set(key, formData[key], 30);
+          Cookies.set(key, formData[key], { expires: 30 });
         });
-        window.location.replace("/");
+        Cookies.set("_id", docId, { expires: 30 });
+        window.location.reload();
       } else {
-        console.log("Error in response: ", response.data);
+        console.error("Failed to save profile.");
+        alert("There was an error saving your profile. Please try again.");
       }
     } catch (err) {
       console.error("Error saving data: ", err);
+      alert("An unexpected error occurred. Please check the console and try again.");
+    } finally {
+      setIsSubmitting(false);
+      window.location.href = "/";
     }
   };
 
-  // Function to handle form input changes
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prevFormData) => ({
-      ...prevFormData,
-      [name]: value,
-    }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
-  return (
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 flex-col dark:bg-slate-800">
-      <div className="max-w-md w-full p-6 bg-white rounded-lg shadow-lg dark:bg-slate-700">
-        <h2 className="text-2xl font-semibold mb-6 dark:text-white">Complete Your Profile</h2>
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div>
-            <label htmlFor="name" className="block text-gray-700 font-medium  dark:text-white">
-              Name:
-            </label>
-            <input
-              type="text"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              required
-              className="mt-1 p-2 block w-full border border-gray-200  rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm dark:text-black dark:font-bold "
-            />
-          </div>
-          <div>
-            <label htmlFor="USN" className="block text-gray-700 font-medium dark:text-white">
-              USN:
-            </label>
-            <input
-              type="text"
-              name="USN"
-              value={formData.USN}
-              onChange={handleChange}
-              required
-              className="mt-1 p-2 block w-full border border-gray-200  rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm dark:font-bold"
-            />
-          </div>
-          <div></div>
-          <div>
-            <label htmlFor="phoneNo" className="block text-gray-700 font-medium dark:text-white">
-              Phone Number(without +91):
-            </label>
-            <input
-              type="text"
-              name="phoneNo"
-              value={formData.phoneNo}
-              onChange={handleChange}
-              required
-              className="mt-1 p-2 block w-full border border-gray-200  rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm  dark:font-bold"
-            />
-          </div>
-          <div>
-            <label htmlFor="branch" className="block text-gray-700 font-medium dark:text-white">
-              Branch:
-            </label>
-            <input
-              type="text"
-              name="branch"
-              value={formData.branch}
-              onChange={handleChange}
-              required
-              className="mt-1 p-2 block w-full border border-gray-200  rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm  dark:font-bold"
-            />
-          </div>
-          <div>
-            <label htmlFor="college" className="block text-gray-700 font-medium dark:text-white">
-              College:
-            </label>
-            <input
-              type="text"
-              name="college"
-              value={formData.college}
-              onChange={handleChange}
-              required
-              className="mt-1 p-2 block w-full border border-gray-200  rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm dark:font-bold"
-            />
-          </div>
-          <div>
-            <label htmlFor="passoutYear" className="block text-gray-700 font-medium dark:text-white">
-              Pass Out Year:
-            </label>
-            <input
-              type="number"
-              name="passoutYear"
-              value={formData.passoutYear}
-              onChange={handleChange}
-              required
-              className="mt-1 p-2 block w-full border border-gray-200  rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm dark:font-bold"
-            />
-          </div>
-          {/* Additional note for the user */}
-          <p className="text-red-600">
-            To apply for any changes in your details after you submit, You need to contact us on email{" "}
-            <span className="text-blue-600 dark:text-red-300">returncode1@gmail.com</span>
-          </p>
+  
+  const handleCancel = () => {
+    signOut("google", { callbackUrl: process.env.NEXTAUTH_URL });
+    Object.keys(Cookies.get()).forEach(cookieName => {
+      Cookies.remove(cookieName);
+    });
+  };
 
-          {/* Submit button */}
-          <div className="flex justify-center">
+  return (
+    <div className="bg-slate-800 rounded-xl shadow-lg p-6 md:p-8">
+      <form onSubmit={handleSubmit} className="space-y-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {/* Name */}
+          <div>
+            <label htmlFor="name" className="block text-sm font-medium text-slate-300 mb-2">Full Name</label>
+            <input type="text" name="name" id="name" value={formData.name} onChange={handleChange} required className="w-full bg-slate-700 border-slate-600 text-white rounded-lg p-3 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition"/>
+          </div>
+          {/* USN */}
+          <div>
+            <label htmlFor="USN" className="block text-sm font-medium text-slate-300 mb-2">USN</label>
+            <input type="text" name="USN" id="USN" value={formData.USN} onChange={handleChange} required className="w-full bg-slate-700 border-slate-600 text-white rounded-lg p-3 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition"/>
+          </div>
+          {/* Phone */}
+          <div>
+            <label htmlFor="phoneNo" className="block text-sm font-medium text-slate-300 mb-2">Phone Number</label>
+            <input type="tel" name="phoneNo" id="phoneNo" value={formData.phoneNo} onChange={handleChange} required placeholder="e.g., 9876543210" className="w-full bg-slate-700 border-slate-600 text-white rounded-lg p-3 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition"/>
+          </div>
+          {/* Branch */}
+          <div>
+            <label htmlFor="branch" className="block text-sm font-medium text-slate-300 mb-2">Branch</label>
+            <input type="text" name="branch" id="branch" value={formData.branch} onChange={handleChange} required className="w-full bg-slate-700 border-slate-600 text-white rounded-lg p-3 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition"/>
+          </div>
+          {/* College */}
+          <div className="md:col-span-2">
+            <label htmlFor="college" className="block text-sm font-medium text-slate-300 mb-2">College</label>
+            <input type="text" name="college" id="college" value={formData.college} onChange={handleChange} required className="w-full bg-slate-700 border-slate-600 text-white rounded-lg p-3 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition"/>
+          </div>
+          {/* Passout Year */}
+          <div>
+            <label htmlFor="passoutYear" className="block text-sm font-medium text-slate-300 mb-2">Pass Out Year</label>
+            <input type="number" name="passoutYear" id="passoutYear" value={formData.passoutYear} onChange={handleChange} required placeholder="e.g., 2025" className="w-full bg-slate-700 border-slate-600 text-white rounded-lg p-3 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition"/>
+          </div>
+        </div>
+
+        <div className="pt-6 border-t border-slate-700">
+          <p className="text-sm text-slate-500 mb-4">
+            Please ensure all details are correct. To apply for any changes after submission, you will need to contact us at <a href="mailto:returncode1@gmail.com" className="text-emerald-400 hover:underline">returncode1@gmail.com</a>.
+          </p>
+          <div className="flex flex-col sm:flex-row-reverse gap-4">
             <button
               type="submit"
-              className="px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              disabled={isSubmitting}
+              className="w-full sm:w-auto px-6 py-3 border border-transparent rounded-lg shadow-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:bg-slate-600 disabled:cursor-not-allowed"
             >
-              Save
+              {isSubmitting ? "Saving..." : "Save Profile"}
             </button>
-                 {/* Button to sign out user */}
-                 <button
-              onClick={() => {
-                // Sign out user and remove all cookies
-                signOut("google", { callbackUrl: process.env.NEXTAUTH_URL });
-                const cookies = Cookies.get();
-                for (const cookie in cookies) {
-                  Cookies.remove(cookie);
-                }
-              }}
-              className=" bg-red-500 text-white p-2 mx-5 rounded-md hover:shadow-xl hover:bg-red-600"
+            <button
+              type="button"
+              onClick={handleCancel}
+              className="w-full sm:w-auto px-6 py-3 border border-slate-600 rounded-lg shadow-sm font-medium text-white hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-500"
             >
-              Cancel
+              Cancel & Sign Out
             </button>
           </div>
-        </form>
-      </div>
+        </div>
+      </form>
     </div>
   );
 };

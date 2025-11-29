@@ -9,20 +9,35 @@ const Setting = () => {
   const { data: session, status } = useSession();
   const router = useRouter();
 
-  // Redirect to the homepage if the user is not authenticated
   useEffect(() => {
-    if (status !== "authenticated") {
+    if (status === "unauthenticated") {
       router.push("/");
     }
   }, [status, router]);
 
-  // If user is not authenticated, return null
-  if (status !== "authenticated") {
-    return null;
+  if (status === "loading") {
+    return (
+      <div className="dark bg-slate-900 w-full min-h-screen flex items-center justify-center">
+        <p className="text-white animate-pulse">Loading settings...</p>
+      </div>
+    );
   }
 
-  // Render User component if _id cookie exists, else render Newuser component
-  return Cookies.get("_id") !== undefined ? <User /> : <Newuser />;
+  if (status === "authenticated") {
+    const hasProfile = Cookies.get("_id") !== undefined;
+    return (
+      <main className="dark bg-slate-900 w-full min-h-screen py-12 md:py-16">
+        <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h1 className="text-3xl font-bold text-white mb-8 text-center">
+            {hasProfile ? "My Profile" : "Create Your Profile"}
+          </h1>
+          {hasProfile ? <User /> : <Newuser />}
+        </div>
+      </main>
+    );
+  }
+
+  return null;
 };
 
 export default Setting;

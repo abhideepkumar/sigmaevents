@@ -1,59 +1,45 @@
 import React from "react";
-import { useSession, signOut } from "next-auth/react";
+import { signOut } from "next-auth/react";
 import Cookies from "js-cookie";
 
 const User = () => {
-  // Fetch user details from cookies or display default values
-  const name = Cookies.get("name") || "Can't Fetch";
-  const email = Cookies.get("email") || "Can't Fetch";
-  const usn = Cookies.get("USN") || "Can't Fetch";
-  const phoneNo = Cookies.get("phoneNo") || "Can't Fetch";
-  const branch = Cookies.get("branch") || "Can't Fetch";
-  const college = Cookies.get("college") || "Can't Fetch";
-  const passoutYear = Cookies.get("LastYear") || "Can't Fetch";
+  const userDetails = {
+    "Full Name": Cookies.get("name") || "Not available",
+    "Email Address": Cookies.get("email") || "Not available",
+    "USN": Cookies.get("USN") || "Not available",
+    "Phone Number": Cookies.get("phoneNo") || "Not available",
+    "Branch": Cookies.get("branch") || "Not available",
+    "College": Cookies.get("college") || "Not available",
+    "Passout Year": Cookies.get("passoutYear") || "Not available", // Corrected cookie name if it was wrong
+  };
+
+  const handleSignOut = () => {
+    signOut("google", { callbackUrl: process.env.NEXTAUTH_URL });
+    Object.keys(Cookies.get()).forEach(cookieName => {
+      Cookies.remove(cookieName);
+    });
+  };
 
   return (
-    <div className="max-h-screen bg-gray-100 flex items-center justify-center dark:bg-slate-800">
-      <div className="bg-white dark:bg-gray-600 p-8 rounded-lg shadow-md max-w-md w-full">
-        <h2 className="text-2xl font-semibold mb-4 dark:text-white">Welcome, {name}</h2>
-        {/* Display user information */}
-        <div className="mb-4">
-          <p className="font-semibold dark:text-white ">Email</p>
-          <p className="text-gray-600  dark:text-gray-200">{email}</p>
-        </div>
-        <div className="mb-4">
-          <p className="font-semibold dark:text-white">USN</p>
-          <p className="text-gray-600  dark:text-gray-200">{usn}</p>
-        </div>
-        <div className="mb-4">
-          <p className="font-semibold dark:text-white">Phone No</p>
-          <p className="text-gray-600  dark:text-gray-200">{phoneNo}</p>
-        </div>
-        <div className="mb-4">
-          <p className="font-semibold dark:text-white">Branch</p>
-          <p className="text-gray-600  dark:text-gray-200">{branch}</p>
-        </div>
-        <div className="mb-4">
-          <p className="font-semibold dark:text-white">College</p>
-          <p className="text-gray-600  dark:text-gray-200">{college}</p>
-        </div>
-        <div className="mb-6">
-          <p className="font-semibold dark:text-white">Passout Year</p>
-          <p className="text-gray-600  dark:text-gray-200">{passoutYear}</p>
-        </div>
-        {/* Button to sign out user */}
+    <div className="bg-slate-800 rounded-xl shadow-lg p-6 md:p-8">
+      <div className="space-y-6">
+        {Object.entries(userDetails).map(([label, value]) => (
+          <div key={label} className="grid grid-cols-1 md:grid-cols-3 gap-2 md:gap-4 items-center">
+            <dt className="text-sm font-medium text-slate-400">{label}</dt>
+            <dd className="md:col-span-2 text-md text-white">{value}</dd>
+          </div>
+        ))}
+      </div>
+
+      <div className="mt-8 pt-6 border-t border-slate-700 text-center">
+         <p className="text-sm text-slate-500 mb-4">
+            Need to change something? Contact us at <a href="mailto:returncode1@gmail.com" className="text-emerald-400 hover:underline">returncode1@gmail.com</a>.
+        </p>
         <button
-          onClick={() => {
-            // Sign out user and remove all cookies
-            signOut("google", { callbackUrl: process.env.NEXTAUTH_URL });
-            const cookies = Cookies.get();
-            for (const cookie in cookies) {
-              Cookies.remove(cookie);
-            }
-          }}
-          className="w-full bg-red-500 text-white py-2 rounded-md hover:shadow-xl hover:bg-red-600"
+          onClick={handleSignOut}
+          className="w-full max-w-xs mx-auto bg-red-600 text-white py-2 px-4 rounded-lg hover:bg-red-700 transition-colors font-semibold"
         >
-          Sign out
+          Sign Out
         </button>
       </div>
     </div>

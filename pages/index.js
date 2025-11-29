@@ -2,51 +2,49 @@ import React from "react";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
+import CTAButton from "@/components/CTAButton";
 
 export default function Home() {
   // Fetch the user session using next-auth
   const { data: session } = useSession();
 
   return (
-    <main className="theme w-full dark:bg-slate-800">
-      <section className="container py-8 px-6">
-        <div className="flex flex-col md:flex-row gap-6">
-          {/* Display a welcome image */}
-          <div className="md:w-1/2">
+    <main className="dark bg-slate-900">
+      <section className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
+        <div className="grid md:grid-cols-2 gap-12 items-center">
+          <div className="text-center md:text-left">
+            <h1 className="text-4xl md:text-5xl font-extrabold text-white leading-tight mb-4">
+              Discover & Manage College Events
+            </h1>
+            <p className="text-lg text-slate-400 mb-8">
+              The ultimate platform for students to find exciting events and for clubs to manage them effortlessly.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+              <CTAButton text="Browse Events" href="/events" large primary />
+              <CTAButton text="Learn More" href="/about" large />
+            </div>
+            {session && (
+                <p className="text-slate-400 mt-8 text-sm">
+                  Logged in as <span className="font-semibold text-emerald-400">{session.user.email}</span>. 
+                  Go to <Link href="/setting" className="underline hover:text-white">Settings</Link>.
+                </p>
+              )}
+          </div>
+          <div className="hidden md:block">
             <Image
-              src="https://source.unsplash.com/collection/8317102/480x360"
-              loader={() => "https://source.unsplash.com/collection/8317102/480x360"}
-              alt="Welcome Image"
-              width={500}
-              height={500}
-              className="rounded-lg"
+              src="https://source.unsplash.com/random/800x600/?technology,event"
+              alt="Tech event"
+              width={800}
+              height={600}
+              className="rounded-xl shadow-2xl shadow-slate-950"
               priority={true}
             />
           </div>
-          {/* Display welcome message and profile link */}
-          <div className="md:w-1/2 flex flex-col justify-center text-center md:text-left">
-            <h2 className="text-3xl font-bold mb-4 dark:text-white">Welcome to Sigma Events!</h2>
-            {/* Check if the user is logged in */}
-            {session ? (
-              // If logged in, display user's email and profile link
-              <p className="text-gray-800 ">
-                <span className=" dark:text-white"> You are logged in as</span> <span className="text-red-600">{session.user.email}</span><span className="dark:text-white" >.View your profile{" "}</span>
-                <Link href="/setting" className="text-red-600">
-                  here
-                </Link>
-              </p>
-            ) : (
-              // If not logged in, prompt to login
-              <p className="text-red-600">Login to create or view your profile.</p>
-            )}
-          </div>
         </div>
       </section>
-      {/* Display footer */}
-      <footer className="bg-green-300 py-4 dark:bg-slate-800">
-        <div className="container mx-auto px-6 text-center">
-          <p className="dark:text-green-300">&copy; {new Date().getFullYear()} Sigma Events. Some rights reserved.</p>
-        </div>
+      <footer className="text-center py-10 text-slate-500 text-sm">
+          <p>&copy; {new Date().getFullYear()} SigmaEvents. All rights reserved.</p>
+          <p>Modern UI for College Club Events</p>
       </footer>
     </main>
   );
